@@ -32,6 +32,7 @@ public class Date implements Comparable<Date> {
     public final int THIRTY_FIRST = 31;
     public final int TWENTY_EIGHTH = 28;
     public final int TWENTY_NINTH = 29;
+    private final int EXPIRATION = 3;
 
 
     /**
@@ -113,6 +114,10 @@ public class Date implements Comparable<Date> {
      */
     public int getDay(){
         return day;
+    }
+
+    public void setExpire(){
+        month += EXPIRATION;
     }
 
     /**

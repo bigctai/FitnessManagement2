@@ -1,5 +1,7 @@
 package projecttwo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -29,6 +31,12 @@ public class GymManager {
         while (!(input = scanUserInput.nextLine()).equals("Q")) {
             String[] inputData = input.split(" ");
             switch (inputData[0]) {
+                case "LS":
+                    loadSchedule();
+                    break;
+                case "LM":
+                    loadMembers();
+                    break;
                 case "A":
                     addMember(inputData);
                     break;
@@ -66,6 +74,26 @@ public class GymManager {
     }
 
     /**
+     *
+     */
+
+    private void loadMembers() {
+        File memberList = new File("/Project2/src/projecttwo/memberList.txt");
+        try {
+            Scanner memberScanner = new Scanner(memberList);
+            while (memberScanner.hasNextLine()) {
+                String[] memberInputData = memberScanner.next().split(" ");
+                addMember(memberInputData);
+            }
+        }
+        catch (FileNotFoundException exception) {
+        }
+    }
+
+    private void loadSchedule(){
+        Scanner classScanner = new Scanner("classSchedule.txt");
+    }
+    /**
      * Performs checks to make sure that member data is valid
      * Checks location, if the member is already in database, and if the member's date of birth and
      * expiration date are valid
@@ -73,8 +101,11 @@ public class GymManager {
      * @param memberToAdd contains member data as elements of an array
      */
     private void addMember(String[] memberToAdd) {
-        if (!isValidLocation(memberToAdd[5])) return;
-        Member memToAdd = new Member(memberToAdd[1], memberToAdd[2], new Date(memberToAdd[3]), new Date(memberToAdd[4]), Location.valueOf(memberToAdd[5].toUpperCase()));
+        Member memToAdd = createMember(memberToAdd);
+        if (!isValidLocation(memberToAdd[4])) return;
+        Date currentDate = new Date();
+        Date expirationDate = currentDate;
+        expirationDate.setExpire();
         for (int i = 0; i < memData.size(); i++) {
             if (memData.returnList()[i].equals(memToAdd)) {
                 System.out.println(memberToAdd[1] + " " + memberToAdd[2] + " is already in the database.");
@@ -82,7 +113,6 @@ public class GymManager {
             }
         }
         Date checkDateOfBirth = new Date(memberToAdd[3]);
-        Date checkExpirationDate = new Date(memberToAdd[4]);
         if (!isOldEnough(checkDateOfBirth, memberToAdd[4])) {
             return;
         }
@@ -90,12 +120,33 @@ public class GymManager {
             System.out.println("DOB " + memberToAdd[3] + ": invalid calendar date!");
             return;
         }
-        if (!(checkExpirationDate.isValid())) {
-            System.out.println("Expiration date " + memberToAdd[3] + ": invalid calendar date!");
-            return;
-        }
         if (memData.add(memToAdd))
             System.out.println(memberToAdd[1] + " " + memberToAdd[2] + " added.");
+    }
+
+    private Member createMember(String[] memberToAdd){
+        String firstName;
+        String lastName;
+        Date dob;
+        Date expirationDate;
+        Location location;
+        if(memberToAdd.length==5){
+            firstName = memberToAdd[0];
+            lastName = memberToAdd[1];
+            dob = new Date(memberToAdd[2]);
+            expirationDate = new Date(memberToAdd[3]);
+            location = Location.valueOf(memberToAdd[4]);
+        }
+        else{
+            firstName = memberToAdd[1];
+            lastName = memberToAdd[2];
+            dob = new Date(memberToAdd[3]);
+            expirationDate = new Date(memberToAdd[4]);
+            location = Location.valueOf(memberToAdd[5]);
+            expirationDate = new Date();
+        }
+        expirationDate.setExpire();
+        return new Member(firstName, lastName, dob, expirationDate, location);
     }
 
     /**
