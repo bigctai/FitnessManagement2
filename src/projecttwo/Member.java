@@ -13,6 +13,7 @@ public class Member implements Comparable<Member> {
     private Date dob;
     private Date expire;
     private Location location;
+    private static final double MEMBERSHIP_FEE = 29.99;
     public static final int EARLIER = -1;
 
     /**
@@ -63,6 +64,9 @@ public class Member implements Comparable<Member> {
      */
     public String county() {
         return this.location.county();
+    }
+    public double membershipFee(){
+        return MEMBERSHIP_FEE;
     }
 
     /**
