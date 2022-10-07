@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated loadMembers">
-      <change afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/projecttwo/memberList" afterDir="false" />
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -63,13 +67,40 @@
       <option name="project" value="LOCAL" />
       <updated>1665007000408</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line">
+      <created>1665093859684</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1665093859684</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="324ecc5d-bd1c-4c02-915b-de8ff045bdec">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="51603227-02f0-43ee-b1bb-f8cf1fe7c39a">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="72467420-c42b-4689-9e36-c53bc704e1f5">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="e012d9b2-db6b-4fcb-a312-ca56a917046b">
           <value>
             <State />
           </value>
@@ -80,6 +111,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created ClassSchedule" />
     <MESSAGE value="Updated loadMembers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated loadMembers" />
+    <MESSAGE value="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line" />
   </component>
 </project>
