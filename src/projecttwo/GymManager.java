@@ -30,12 +30,9 @@ public class GymManager {
         System.out.println("Gym Manager running...");
         while (!(input = scanUserInput.nextLine()).equals("Q")) {
             String[] inputData = input.split(" ");
-            switch (inputData[0]) {
-                case "LS":
-                    loadSchedule();
-                    break;
-                case "LM":
-                    loadMembers();
+            switch (inputData[0].substring(0, 1)) {
+                case "L":
+                    load(inputData[0]);
                     break;
                 case "A":
                     addMember(inputData);
@@ -44,16 +41,7 @@ public class GymManager {
                     removeMember(inputData);
                     break;
                 case "P":
-                    memData.print();
-                    break;
-                case "PC":
-                    memData.printByCounty();
-                    break;
-                case "PN":
-                    memData.printByName();
-                    break;
-                case "PD":
-                    memData.printByExpirationDate();
+                    printMembers(inputData[0]);
                     break;
                 case "S":
                     printClasses();
@@ -73,6 +61,15 @@ public class GymManager {
         System.out.println("Gym Manager terminated.");
     }
 
+    private void load(String loadType){
+        if(loadType.equals("LM")){
+            loadMembers();
+        }
+        else{
+            loadSchedule();
+        }
+    }
+
     /**
      *
      */
@@ -83,7 +80,9 @@ public class GymManager {
             Scanner memberScanner = new Scanner(memberList);
             while (memberScanner.hasNextLine()) {
                 String[] memberInputData = memberScanner.next().split(" ");
-                addMember(memberInputData);
+                if (memberInputData[0].charAt(0) == 'A') {
+                    addMember(memberInputData);
+                }
             }
         }
         catch (FileNotFoundException exception) {
@@ -102,6 +101,7 @@ public class GymManager {
      */
     private void addMember(String[] memberToAdd) {
         Member memToAdd = createMember(memberToAdd);
+        String membershipType = memberToAdd[0];
         if (!isValidLocation(memberToAdd[4])) return;
         Date currentDate = new Date();
         Date expirationDate = currentDate;
@@ -147,6 +147,10 @@ public class GymManager {
         }
         expirationDate.setExpire();
         return new Member(firstName, lastName, dob, expirationDate, location);
+    }
+
+    private Member createFamilyMember(String[] memberToAdd){
+
     }
 
     /**
@@ -351,5 +355,21 @@ public class GymManager {
             }
         }
         return false;
+    }
+
+    private void printMembers(String sortType){
+        switch(sortType){
+            case "P" :
+                memData.print();
+            case "PC":
+                memData.printByCounty();
+            case "PD":
+                memData.printByExpirationDate();
+            case "PN":
+                memData.printByName();
+            case "PF":
+                memData.printWithFees();
+        }
+
     }
 }
