@@ -14,6 +14,8 @@ public class Member implements Comparable<Member> {
     private Date expire;
     private Location location;
     public static final int EARLIER = -1;
+    public static final double ONE_TIME = 29.99;
+    public static final double PER_MONTH = 39.99;
 
     /**
      * Constructs a Member with a first name, last name, date of birth, expiration date, and location
@@ -113,6 +115,11 @@ public class Member implements Comparable<Member> {
         } else {
             return false;
         }
+    }
+
+    public double membershipfFee(){
+        double fee = ONE_TIME + (3*PER_MONTH);
+        return fee;
     }
 
     @Override
