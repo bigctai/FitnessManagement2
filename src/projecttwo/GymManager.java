@@ -30,32 +30,32 @@ public class GymManager {
         System.out.println("Gym Manager running...");
         while (!(input = scanUserInput.nextLine()).equals("Q")) {
             String[] inputData = input.split(" ");
-            switch (inputData[0].substring(0, 1)) {
-                case "L":
-                    load(inputData[0]);
-                    break;
-                case "A":
-                    addMember(inputData);
-                    break;
-                case "R":
-                    removeMember(inputData);
-                    break;
-                case "P":
-                    printMembers(inputData[0]);
-                    break;
-                case "S":
-                    printClasses();
-                    break;
-                case "C":
-                    checkIn(inputData);
-                    break;
-                case "D":
-                    dropClass(inputData);
-                    break;
-                case "":
-                    break;
-                default:
-                    System.out.println(inputData[0] + " is an invalid command!");
+            if(inputData.length > 0 && inputData[0].length() > 0){
+                switch (inputData[0].charAt(0)) {
+                    case 'L':
+                        load(inputData[0]);
+                        break;
+                    case 'A':
+                        addMember(inputData);
+                        break;
+                    case 'R':
+                        removeMember(inputData);
+                        break;
+                    case 'P':
+                        printMembers(inputData[0]);
+                        break;
+                    case 'S':
+                        printClasses();
+                        break;
+                    case 'C':
+                        checkIn(inputData);
+                        break;
+                    case 'D':
+                        dropClass(inputData);
+                        break;
+                    default:
+                        System.out.println(inputData[0] + " is an invalid command!");
+                }
             }
         }
         System.out.println("Gym Manager terminated.");
@@ -102,8 +102,14 @@ public class GymManager {
      * @param memberToAdd contains member data as elements of an array
      */
     private void addMember(String[] memberToAdd) {
+        if(!memberToAdd[0].equals("AF") && !memberToAdd[0].equals("AP") && !memberToAdd[0].equals("A")){
+            System.out.println(memberToAdd[0] + " is an invalid command!");
+            return;
+        }
+        if(!isValidLocation(memberToAdd[4])){
+            return;
+        }
         Member memToAdd = createMember(memberToAdd, false);
-        if (!isValidLocation(memToAdd.getLocation())) return;
         Date currentDate = new Date();
         Date expirationDate = currentDate;
         expirationDate.setExpire();
@@ -180,6 +186,10 @@ public class GymManager {
      * @param memberToRemove contains member data as elements of an array
      */
     private void removeMember(String[] memberToRemove) {
+        if(!memberToRemove[0].equals("R")){
+            System.out.println(memberToRemove[0] + " is an invalid command!");
+            return;
+        }
         if (memData.remove(new Member(memberToRemove[1].toUpperCase(), memberToRemove[2].toUpperCase(),
                 new Date(memberToRemove[3]))))
             System.out.println(memberToRemove[1] + " " + memberToRemove[2] + " removed.");
@@ -267,9 +277,9 @@ public class GymManager {
      * @param location To be checked against the elements of the locations array
      * @return true if the location is in the array of locations, else false
      */
-    private boolean isValidLocation(Location location) {
+    private boolean isValidLocation(String location) {
         for (Location locations : Location.values()) {
-            if ((location.name()).equals(locations.name())) {
+            if (location.equals(locations.name())) {
                 return true;
             }
         }
@@ -380,14 +390,19 @@ public class GymManager {
         switch(sortType){
             case "P" :
                 memData.print();
+                break;
             case "PC":
                 memData.printByCounty();
+                break;
             case "PD":
                 memData.printByExpirationDate();
+                break;
             case "PN":
                 memData.printByName();
+                break;
             case "PF":
                 memData.printWithFees();
+                break;
         }
 
     }
