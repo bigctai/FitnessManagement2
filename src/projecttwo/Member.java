@@ -65,6 +65,9 @@ public class Member implements Comparable<Member> {
     public String county() {
         return this.location.county();
     }
+
+    public Location getLocation(){return this.location;}
+    public Date dob() {return this.dob;}
     public double membershipFee(){
         return MEMBERSHIP_FEE;
     }
@@ -94,7 +97,6 @@ public class Member implements Comparable<Member> {
      * @return the string of the member
      */
     public String toString() {
-        //NEED TO FIGURE OUT expires vs. expired
         if (expire != null && location != null) {
             return fname + " " + lname + ", " + "DOB: " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear() + ", " +
                     "Membership expires " + expire.getMonth() + "/" + expire.getDay() + "/" + expire.getYear() + ", " +
