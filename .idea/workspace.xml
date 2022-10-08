@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Fixed bugs that prevented program from running">
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Fixed location bug">
+      <change afterPath="$PROJECT_DIR$/src/classSchedule" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Time.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665215046936</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixed location bug">
+      <created>1665220355518</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1665220355518</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,6 +205,7 @@
     <MESSAGE value="Updated constructors and toString methods" />
     <MESSAGE value="Updated workspace" />
     <MESSAGE value="Fixed bugs that prevented program from running" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs that prevented program from running" />
+    <MESSAGE value="Fixed location bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed location bug" />
   </component>
 </project>

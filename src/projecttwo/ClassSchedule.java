@@ -18,8 +18,8 @@ public class ClassSchedule {
         return classes[indexOfClass];
     }
 
-    public void addClass(){
-
+    public void addClass(FitnessClass fitClass){
+        classes[numOfClasses] = fitClass;
     }
 
 }

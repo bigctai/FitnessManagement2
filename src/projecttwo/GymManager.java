@@ -92,13 +92,17 @@ public class GymManager {
     }
 
     private void loadSchedule(){
-        File scheduleList = new File("/Users/christai/IdeaProjects/Project2/src/memberList");
+        File scheduleList = new File("/Users/christai/IdeaProjects/Project2/src/classSchedule");
         try{
             Scanner classScanner = new Scanner(scheduleList);
-            System.out.println("list of classes loaded-");
+            System.out.println("-list of classes loaded-");
             while(classScanner.hasNextLine()){
                 String [] classInputData = classScanner.nextLine().split(" ");
+                FitnessClass fitClass = new FitnessClass(Time.valueOf(classInputData[2].toUpperCase()),
+                        classInputData[1], classInputData[0], Location.valueOf(classInputData[3].toUpperCase()), new Member[0]);
+                fitClass.printClass();
             }
+            System.out.println("-end of class list-");
         }
         catch(FileNotFoundException exception){
 
