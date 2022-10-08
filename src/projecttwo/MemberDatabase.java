@@ -209,4 +209,12 @@ public class MemberDatabase {
         }
         System.out.println("-end of list-\n");
     } //sort by last name and then first name
+
+    public void printWithFees(){
+        for(int i = 0; i < size; i++){
+            if(mlist[i].membershipFee() > 0){
+                System.out.println(mlist[i].toString());
+            }
+        }
+    }
 }

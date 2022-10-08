@@ -30,12 +30,9 @@ public class GymManager {
         System.out.println("Gym Manager running...");
         while (!(input = scanUserInput.nextLine()).equals("Q")) {
             String[] inputData = input.split(" ");
-            switch (inputData[0]) {
-                case "LS":
-                    loadSchedule();
-                    break;
-                case "LM":
-                    loadMembers();
+            switch (inputData[0].substring(0, 1)) {
+                case "L":
+                    load(inputData[0]);
                     break;
                 case "A":
                     addMember(inputData);
@@ -44,16 +41,7 @@ public class GymManager {
                     removeMember(inputData);
                     break;
                 case "P":
-                    memData.print();
-                    break;
-                case "PC":
-                    memData.printByCounty();
-                    break;
-                case "PN":
-                    memData.printByName();
-                    break;
-                case "PD":
-                    memData.printByExpirationDate();
+                    printMembers(inputData[0]);
                     break;
                 case "S":
                     printClasses();
@@ -73,18 +61,31 @@ public class GymManager {
         System.out.println("Gym Manager terminated.");
     }
 
+    private void load(String loadType){
+        if(loadType.equals("LM")){
+            loadMembers();
+        }
+        else{
+            loadSchedule();
+        }
+    }
+
     /**
      *
      */
 
     private void loadMembers() {
-        File memberList = new File("/Project2/src/projecttwo/memberList.txt");
+        File memberList = new File("/Users/christai/IdeaProjects/Project2/src/memberList");
         try {
             Scanner memberScanner = new Scanner(memberList);
+            System.out.println("-list of members loaded-");
             while (memberScanner.hasNextLine()) {
-                String[] memberInputData = memberScanner.next().split(" ");
-                addMember(memberInputData);
+                String[] memberInputData = memberScanner.nextLine().replaceAll("  ", " ").split(" ");
+                Member member = createMember(memberInputData, true);
+                memData.add(member);
+                System.out.println(member.toString());
             }
+            System.out.println("-end of list-");
         }
         catch (FileNotFoundException exception) {
         }
@@ -101,52 +102,74 @@ public class GymManager {
      * @param memberToAdd contains member data as elements of an array
      */
     private void addMember(String[] memberToAdd) {
-        Member memToAdd = createMember(memberToAdd);
-        if (!isValidLocation(memberToAdd[4])) return;
+        Member memToAdd = createMember(memberToAdd, false);
+        if (!isValidLocation(memToAdd.getLocation())) return;
         Date currentDate = new Date();
         Date expirationDate = currentDate;
         expirationDate.setExpire();
         for (int i = 0; i < memData.size(); i++) {
             if (memData.returnList()[i].equals(memToAdd)) {
-                System.out.println(memberToAdd[1] + " " + memberToAdd[2] + " is already in the database.");
+                System.out.println(memToAdd.fullName() + " is already in the database.");
                 return;
             }
         }
-        Date checkDateOfBirth = new Date(memberToAdd[3]);
-        if (!isOldEnough(checkDateOfBirth, memberToAdd[4])) {
+        if (!isOldEnough(memToAdd.dob())) {
             return;
         }
-        if (!(checkDateOfBirth.isValid())) {
+        if (!(memToAdd.dob().isValid())) {
             System.out.println("DOB " + memberToAdd[3] + ": invalid calendar date!");
             return;
         }
         if (memData.add(memToAdd))
-            System.out.println(memberToAdd[1] + " " + memberToAdd[2] + " added.");
+            System.out.println(memToAdd.fullName() + " added.");
     }
 
-    private Member createMember(String[] memberToAdd){
+    private Member createMember(String[] memberToAdd, boolean fromFile){
         String firstName;
         String lastName;
         Date dob;
         Date expirationDate;
-        Location location;
-        if(memberToAdd.length==5){
+        Location location = Location.valueOf(memberToAdd[4]);
+        if(!fromFile){
+            firstName = memberToAdd[1];
+            lastName = memberToAdd[2];
+            dob = new Date(memberToAdd[3]);
+            expirationDate = new Date();
+            if(memberToAdd[0].equals("AF")){
+                expirationDate.setExpire();
+                return new Family (firstName, lastName, dob, expirationDate, location, 1);
+            }
+            else if(memberToAdd[0].equals("AP")){
+                expirationDate.setExpire();
+                return new Premium (firstName, lastName, dob, expirationDate, location, 3);
+            }
+        }
+        else{
             firstName = memberToAdd[0];
             lastName = memberToAdd[1];
             dob = new Date(memberToAdd[2]);
             expirationDate = new Date(memberToAdd[3]);
-            location = Location.valueOf(memberToAdd[4]);
-        }
-        else{
-            firstName = memberToAdd[1];
-            lastName = memberToAdd[2];
-            dob = new Date(memberToAdd[3]);
-            expirationDate = new Date(memberToAdd[4]);
-            location = Location.valueOf(memberToAdd[5]);
-            expirationDate = new Date();
         }
         expirationDate.setExpire();
         return new Member(firstName, lastName, dob, expirationDate, location);
+    }
+
+    private Family createFamilyMember(String[] memberToAdd){
+        String firstName = memberToAdd[0];
+        String lastName = memberToAdd[1];
+        Date dob = new Date(memberToAdd[2]);
+        Date expirationDate = new Date(memberToAdd[3]);
+        Location location = Location.valueOf(memberToAdd[4]);
+        return new Family(firstName, lastName, dob, expirationDate, location, 1);
+    }
+
+    private Premium createPremiumMember(String[] memberToAdd){
+        String firstName = memberToAdd[0];
+        String lastName = memberToAdd[1];
+        Date dob = new Date(memberToAdd[2]);
+        Date expirationDate = new Date(memberToAdd[3]);
+        Location location = Location.valueOf(memberToAdd[4]);
+        return new Premium(firstName, lastName, dob, expirationDate, location, 1);
     }
 
     /**
@@ -244,9 +267,9 @@ public class GymManager {
      * @param location To be checked against the elements of the locations array
      * @return true if the location is in the array of locations, else false
      */
-    private boolean isValidLocation(String location) {
+    private boolean isValidLocation(Location location) {
         for (Location locations : Location.values()) {
-            if ((location.toUpperCase()).equals(locations.name())) {
+            if ((location.name()).equals(locations.name())) {
                 return true;
             }
         }
@@ -275,11 +298,11 @@ public class GymManager {
      * Compares the member's age to the current date
      *
      * @param checkDateOfBirth the member who is checking in's date of birth
-     * @param dob              the String form of checkDateOfBirth, to be printed out
      * @return false if the member is under 18, else true
      */
-    private boolean isOldEnough(Date checkDateOfBirth, String dob) {
+    private boolean isOldEnough(Date checkDateOfBirth) {
         Date currentDate = new Date();
+        String dob = checkDateOfBirth.dateString();
         if (currentDate.compareTo(checkDateOfBirth) <= 0) {
             System.out.println("DOB " + dob + ": cannot be today or a future date!");
             return false;
@@ -351,5 +374,21 @@ public class GymManager {
             }
         }
         return false;
+    }
+
+    private void printMembers(String sortType){
+        switch(sortType){
+            case "P" :
+                memData.print();
+            case "PC":
+                memData.printByCounty();
+            case "PD":
+                memData.printByExpirationDate();
+            case "PN":
+                memData.printByName();
+            case "PF":
+                memData.printWithFees();
+        }
+
     }
 }
