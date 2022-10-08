@@ -6,7 +6,7 @@ package projecttwo;
  * @author Chris Tai, Shreyank Yelagoila
  */
 public enum Time {
-    MORNING(9, 30), AFTERNOON(14, 00);
+    MORNING(9, 30), AFTERNOON(14, 00), EVENING(18, 30);
     private final int hour;
     private final int minute;
 

@@ -13,6 +13,7 @@ public class FitnessClass {
     private String instructor;
     private String className;
     private Member[] participants;
+    private Location gymLocation;
     private int size;
     private final int NOT_FOUND = -1;
 
@@ -25,11 +26,12 @@ public class FitnessClass {
      * @param className the name of the class, passed in as a String
      * @param participants the array of participants in the class
      */
-    public FitnessClass(Time timeOfClass, String instructor, String className, Member[] participants) {
+    public FitnessClass(Time timeOfClass, String instructor, String className, Location gymLocation, Member[] participants) {
         this.timeOfClass = timeOfClass;
         this.instructor = instructor;
         this.className = className;
         this.participants = participants;
+        this.gymLocation = gymLocation;
         this.size = this.participants.length;
     }
 
@@ -57,8 +59,8 @@ public class FitnessClass {
      */
     public void printClass() {
         DecimalFormat formatTime = new DecimalFormat("00");
-        System.out.println(className + " - " + instructor + " " + timeOfClass.hour() + ":"
-                + formatTime.format(timeOfClass.minute()));
+        System.out.println(className.toUpperCase() + " - " + instructor.toUpperCase() + ", " + timeOfClass.hour() + ":"
+                + formatTime.format(timeOfClass.minute()) + ", " + gymLocation);
         if (participants.length > 0) {
             System.out.println("\t** participants **");
             for (int i = 0; i < size; i++) {

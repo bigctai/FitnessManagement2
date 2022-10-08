@@ -5,9 +5,9 @@ public class ClassSchedule {
     private FitnessClass[] classes;
     private int numOfClasses;
 
-    public ClassSchedule(int numOfClasses){
-        classes = new FitnessClass[numOfClasses];
-        this.numOfClasses = numOfClasses;
+    public ClassSchedule(){
+        classes = new FitnessClass[15];
+        numOfClasses = 0;
     }
 
     public FitnessClass[] returnList(){
@@ -16,6 +16,10 @@ public class ClassSchedule {
 
     public FitnessClass getClass(int indexOfClass){
         return classes[indexOfClass];
+    }
+
+    public void addClass(FitnessClass fitClass){
+        classes[numOfClasses] = fitClass;
     }
 
 }

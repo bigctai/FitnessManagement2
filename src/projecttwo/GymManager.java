@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class GymManager {
     private MemberDatabase memData = new MemberDatabase();
 
-    private ClassSchedule classSchedule = new ClassSchedule(3);
+    private ClassSchedule classSchedule = new ClassSchedule();
     private Scanner scanUserInput = new Scanner(System.in);
     private String input;
     private static final int NOT_FOUND = -1;
@@ -30,32 +30,32 @@ public class GymManager {
         System.out.println("Gym Manager running...");
         while (!(input = scanUserInput.nextLine()).equals("Q")) {
             String[] inputData = input.split(" ");
-            switch (inputData[0].substring(0, 1)) {
-                case "L":
-                    load(inputData[0]);
-                    break;
-                case "A":
-                    addMember(inputData);
-                    break;
-                case "R":
-                    removeMember(inputData);
-                    break;
-                case "P":
-                    printMembers(inputData[0]);
-                    break;
-                case "S":
-                    printClasses();
-                    break;
-                case "C":
-                    checkIn(inputData);
-                    break;
-                case "D":
-                    dropClass(inputData);
-                    break;
-                case "":
-                    break;
-                default:
-                    System.out.println(inputData[0] + " is an invalid command!");
+            if(inputData.length > 0 && inputData[0].length() > 0){
+                switch (inputData[0].charAt(0)) {
+                    case 'L':
+                        load(inputData[0]);
+                        break;
+                    case 'A':
+                        addMember(inputData);
+                        break;
+                    case 'R':
+                        removeMember(inputData);
+                        break;
+                    case 'P':
+                        printMembers(inputData[0]);
+                        break;
+                    case 'S':
+                        printClasses();
+                        break;
+                    case 'C':
+                        checkIn(inputData);
+                        break;
+                    case 'D':
+                        dropClass(inputData);
+                        break;
+                    default:
+                        System.out.println(inputData[0] + " is an invalid command!");
+                }
             }
         }
         System.out.println("Gym Manager terminated.");
@@ -92,7 +92,25 @@ public class GymManager {
     }
 
     private void loadSchedule(){
-        Scanner classScanner = new Scanner("classSchedule.txt");
+        File scheduleList = new File("/Users/christai/IdeaProjects/Project2/src/classSchedule");
+        try{
+            Scanner classScanner = new Scanner(scheduleList);
+            System.out.println("-list of classes loaded-");
+            while(classScanner.hasNextLine()){
+                String [] classInputData = classScanner.nextLine().split(" ");
+                FitnessClass fitClass = new FitnessClass(Time.valueOf(classInputData[2].toUpperCase()),
+                        classInputData[1], classInputData[0], Location.valueOf(classInputData[3].toUpperCase()), new Member[0]);
+                fitClass.printClass();
+            }
+            System.out.println("-end of class list-");
+        }
+        catch(FileNotFoundException exception){
+
+        }
+    }
+
+    private void addClass(){
+
     }
     /**
      * Performs checks to make sure that member data is valid
@@ -102,8 +120,14 @@ public class GymManager {
      * @param memberToAdd contains member data as elements of an array
      */
     private void addMember(String[] memberToAdd) {
+        if(!memberToAdd[0].equals("AF") && !memberToAdd[0].equals("AP") && !memberToAdd[0].equals("A")){
+            System.out.println(memberToAdd[0] + " is an invalid command!");
+            return;
+        }
+        if(!isValidLocation(memberToAdd[4])){
+            return;
+        }
         Member memToAdd = createMember(memberToAdd, false);
-        if (!isValidLocation(memToAdd.getLocation())) return;
         Date currentDate = new Date();
         Date expirationDate = currentDate;
         expirationDate.setExpire();
@@ -129,7 +153,7 @@ public class GymManager {
         String lastName;
         Date dob;
         Date expirationDate;
-        Location location = Location.valueOf(memberToAdd[4]);
+        Location location = Location.valueOf(memberToAdd[4].toUpperCase());
         if(!fromFile){
             firstName = memberToAdd[1];
             lastName = memberToAdd[2];
@@ -180,6 +204,10 @@ public class GymManager {
      * @param memberToRemove contains member data as elements of an array
      */
     private void removeMember(String[] memberToRemove) {
+        if(!memberToRemove[0].equals("R")){
+            System.out.println(memberToRemove[0] + " is an invalid command!");
+            return;
+        }
         if (memData.remove(new Member(memberToRemove[1].toUpperCase(), memberToRemove[2].toUpperCase(),
                 new Date(memberToRemove[3]))))
             System.out.println(memberToRemove[1] + " " + memberToRemove[2] + " removed.");
@@ -267,9 +295,9 @@ public class GymManager {
      * @param location To be checked against the elements of the locations array
      * @return true if the location is in the array of locations, else false
      */
-    private boolean isValidLocation(Location location) {
+    private boolean isValidLocation(String location) {
         for (Location locations : Location.values()) {
-            if ((location.name()).equals(locations.name())) {
+            if (location.toUpperCase().equals(locations.name())) {
                 return true;
             }
         }
@@ -380,14 +408,19 @@ public class GymManager {
         switch(sortType){
             case "P" :
                 memData.print();
+                break;
             case "PC":
                 memData.printByCounty();
+                break;
             case "PD":
                 memData.printByExpirationDate();
+                break;
             case "PN":
                 memData.printByName();
+                break;
             case "PF":
                 memData.printWithFees();
+                break;
         }
 
     }
