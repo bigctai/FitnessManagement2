@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class GymManager {
     private MemberDatabase memData = new MemberDatabase();
 
-    private ClassSchedule classSchedule = new ClassSchedule(3);
+    private ClassSchedule classSchedule = new ClassSchedule();
     private Scanner scanUserInput = new Scanner(System.in);
     private String input;
     private static final int NOT_FOUND = -1;
@@ -92,7 +92,21 @@ public class GymManager {
     }
 
     private void loadSchedule(){
-        Scanner classScanner = new Scanner("classSchedule.txt");
+        File scheduleList = new File("/Users/christai/IdeaProjects/Project2/src/memberList");
+        try{
+            Scanner classScanner = new Scanner(scheduleList);
+            System.out.println("list of classes loaded-");
+            while(classScanner.hasNextLine()){
+                String [] classInputData = classScanner.nextLine().split(" ");
+            }
+        }
+        catch(FileNotFoundException exception){
+
+        }
+    }
+
+    private void addClass(){
+
     }
     /**
      * Performs checks to make sure that member data is valid
@@ -135,7 +149,7 @@ public class GymManager {
         String lastName;
         Date dob;
         Date expirationDate;
-        Location location = Location.valueOf(memberToAdd[4]);
+        Location location = Location.valueOf(memberToAdd[4].toUpperCase());
         if(!fromFile){
             firstName = memberToAdd[1];
             lastName = memberToAdd[2];
@@ -279,7 +293,7 @@ public class GymManager {
      */
     private boolean isValidLocation(String location) {
         for (Location locations : Location.values()) {
-            if (location.equals(locations.name())) {
+            if (location.toUpperCase().equals(locations.name())) {
                 return true;
             }
         }

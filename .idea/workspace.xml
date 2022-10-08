@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated">
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Fixed bugs that prevented program from running">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/memberList" beforeDir="false" afterPath="$PROJECT_DIR$/src/memberList" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +88,42 @@
       <option name="project" value="LOCAL" />
       <updated>1665190748573</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed bugs and updated method to load members from files">
+      <created>1665209239566</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1665209239566</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added functions to return private variables">
+      <created>1665209281117</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665209281117</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated constructors and toString methods">
+      <created>1665209300932</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1665209300932</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated workspace">
+      <created>1665209313899</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1665209313899</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed bugs that prevented program from running">
+      <created>1665215046936</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665215046936</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -159,6 +190,11 @@
     <MESSAGE value="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line" />
     <MESSAGE value="Created constructors for Family and Premium classes, along with membershipFee method" />
     <MESSAGE value="Updated run method to call based on first character" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated run method to call based on first character" />
+    <MESSAGE value="Fixed bugs and updated method to load members from files" />
+    <MESSAGE value="Added functions to return private variables" />
+    <MESSAGE value="Updated constructors and toString methods" />
+    <MESSAGE value="Updated workspace" />
+    <MESSAGE value="Fixed bugs that prevented program from running" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs that prevented program from running" />
   </component>
 </project>
