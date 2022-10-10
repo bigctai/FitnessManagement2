@@ -242,25 +242,25 @@ public class GymManager {
      */
     private void checkIn(String[] memberToCheckIn) {
         if(memberToCheckIn[0].equals("C")) {
-            Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[2], memberToCheckIn[3],
-                    new Date(memberToCheckIn[4])));
+            Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
+                    new Date(memberToCheckIn[6])));
             //NEED TO BREAK INTO SEPARATE METHOD THAT CHECKS EACH VALUE PASSED IN - INSTRUCTOR, CLASSNAME, and LOCATION
             FitnessClass classToCheckInto = classSchedule.find(memberToCheckIn[2],
-                    Location.valueOf(memberToCheckIn[3]), memberToCheckIn[1]);
-            if (!isValidDateOfBirth(memberToCheckIn[4])) return;
+                    Location.valueOf(memberToCheckIn[3].toUpperCase()), memberToCheckIn[1]);
+            if (!isValidDateOfBirth(memToCheckIn.dob())) return;
             Date currentDate = new Date();
             boolean memExists = false;
             for (int i = 0; i < memData.size(); i++) {
                 if (memData.returnList()[i].equals(memToCheckIn)) {
                     if (memData.returnList()[i].expirationDate().compareTo(currentDate) < 0) {
-                        System.out.println(memToCheckIn.fullName() + " " + memberToCheckIn[4] + " membership expired.");
+                        System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " membership expired.");
                         return;
                     }
                     memExists = true;
                 }
             }
             if (!memExists) {
-                System.out.println(memToCheckIn.fullName() + " " + memberToCheckIn[4] + " is not in the database.");
+                System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " is not in the database.");
                 return;
             }
             int fitClassIndex = getClassIndex(memberToCheckIn[1], memToCheckIn, true);
@@ -330,10 +330,9 @@ public class GymManager {
      * @param dob the Member's date of birth to be checked
      * @return false if the date of birth is invalid, else true
      */
-    private boolean isValidDateOfBirth(String dob) {
-        Date dateOfBirth = new Date(dob);
-        if (!(dateOfBirth.isValid())) {
-            System.out.println("DOB " + dob + ": invalid calendar date!");
+    private boolean isValidDateOfBirth(Date dob) {
+        if (!(dob.isValid())) {
+            System.out.println("DOB " + dob.dateString() + ": invalid calendar date!");
             return false;
         }
         return true;
