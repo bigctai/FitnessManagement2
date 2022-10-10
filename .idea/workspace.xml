@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Created classSchedule file and method to load classes from file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,5 +213,16 @@
     <MESSAGE value="Fixed location bug" />
     <MESSAGE value="Created classSchedule file and method to load classes from file" />
     <option name="LAST_COMMIT_MESSAGE" value="Created classSchedule file and method to load classes from file" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/projecttwo/GymManager.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
