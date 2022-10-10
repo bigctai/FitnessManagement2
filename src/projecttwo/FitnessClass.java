@@ -44,6 +44,11 @@ public class FitnessClass {
         return this.className;
     }
 
+    public Location getLocation(){ return gymLocation;}
+    public String getInstructor(){
+        return instructor;
+    }
+
     /**
      * Gets the time of the class
      *
