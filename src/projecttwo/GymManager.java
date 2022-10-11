@@ -101,6 +101,7 @@ public class GymManager {
                 FitnessClass fitClass = new FitnessClass(Time.valueOf(classInputData[2].toUpperCase()),
                         classInputData[1], classInputData[0], Location.valueOf(classInputData[3].toUpperCase()), new Member[0]);
                 fitClass.printClass();
+                classSchedule.addClass(fitClass);
             }
             System.out.println("-end of class list-");
         }
@@ -109,9 +110,6 @@ public class GymManager {
         }
     }
 
-    private void addClass(){
-
-    }
     /**
      * Performs checks to make sure that member data is valid
      * Checks location, if the member is already in database, and if the member's date of birth and
@@ -381,7 +379,7 @@ public class GymManager {
      * they already checked in, else NOT_FOUND
      */
     private int getClassIndex(String className, Member memToCheck, boolean checkingIn) {
-        for (int i = 0; i < classSchedule.returnList().length; i++) {
+        for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
             FitnessClass fitClassPtr = classSchedule.getClass(i);
             if (className.equalsIgnoreCase(fitClassPtr.className())) {
                 if (checkingIn) {
