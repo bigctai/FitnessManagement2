@@ -13,10 +13,9 @@ public class Member implements Comparable<Member> {
     private Date dob;
     private Date expire;
     private Location location;
-    private static final double MEMBERSHIP_FEE = 29.99;
     public static final int EARLIER = -1;
-    public static final double ONE_TIME = 29.99;
-    public static final double PER_MONTH = 39.99;
+    private static final double ONE_TIME = 29.99;
+    private static final double PER_MONTH = 39.99;
 
     /**
      * Constructs a Member with a first name, last name, date of birth, expiration date, and location
@@ -70,9 +69,6 @@ public class Member implements Comparable<Member> {
 
     public Location getLocation(){return this.location;}
     public Date dob() {return this.dob;}
-    public double membershipFee(){
-        return MEMBERSHIP_FEE;
-    }
 
     /**
      * Gets the zip code the member lives in
