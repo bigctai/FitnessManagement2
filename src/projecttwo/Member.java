@@ -13,6 +13,7 @@ public class Member implements Comparable<Member> {
     private Date dob;
     private Date expire;
     private Location location;
+    private static final double MEMBERSHIP_FEE = 29.99;
     public static final int EARLIER = -1;
     public static final double ONE_TIME = 29.99;
     public static final double PER_MONTH = 39.99;
@@ -67,6 +68,12 @@ public class Member implements Comparable<Member> {
         return this.location.county();
     }
 
+    public Location getLocation(){return this.location;}
+    public Date dob() {return this.dob;}
+    public double membershipFee(){
+        return MEMBERSHIP_FEE;
+    }
+
     /**
      * Gets the zip code the member lives in
      *
@@ -92,7 +99,6 @@ public class Member implements Comparable<Member> {
      * @return the string of the member
      */
     public String toString() {
-        //NEED TO FIGURE OUT expires vs. expired
         if (expire != null && location != null) {
             return fname + " " + lname + ", " + "DOB: " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear() + ", " +
                     "Membership expires " + expire.getMonth() + "/" + expire.getDay() + "/" + expire.getYear() + ", " +

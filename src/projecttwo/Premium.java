@@ -1,14 +1,17 @@
 package projecttwo;
 
 public class Premium extends Family{
-    public static final double PER_YEAR = 719.88;
-    public static final double ONE_MONTH = 59.99;
-    public Premium(){
 
+    private static final double MEMBERSHIP_FEE = 0;
+    public Premium(String fname, String lname, Date dob, Date expire, Location location, int guestPass){
+        super(fname, lname, dob, expire, location, guestPass);
+    }
+    @Override
+    public double membershipFee(){
+        return MEMBERSHIP_FEE;
     }
 
-    public double membershipFee(){
-        double fee = PER_YEAR-ONE_MONTH;
-        return fee;
+    public String toString(){
+        return super.toString();
     }
 }
