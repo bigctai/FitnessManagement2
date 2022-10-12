@@ -34,6 +34,7 @@ public class ClassSchedule {
 
     public void addClass(FitnessClass fitClass){
         classes[numOfClasses] = fitClass;
+        numOfClasses++;
     }
 
 }
