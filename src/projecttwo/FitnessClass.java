@@ -1,6 +1,7 @@
 package projecttwo;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  * Defines a class for members to check in to, with a time, instructor and an array of participants
@@ -14,6 +15,7 @@ public class FitnessClass {
     private String className;
     private Member[] participants;
     private Location gymLocation;
+    private ArrayList<Member> guests;
     private int size;
     private final int NOT_FOUND = -1;
 

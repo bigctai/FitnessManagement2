@@ -124,7 +124,7 @@ public class MemberDatabase {
     public Member getFullDetails(Member mem) {
         if (find(mem) >= 0) return mlist[find(mem)];
         else {
-            return mem;
+            return null;
         }
     }
 
