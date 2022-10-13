@@ -12,7 +12,7 @@ public class Family extends Member{
 
     @Override
     public double membershipFee(){
-        double fee = ONE_TIME + (3*FAM_PER_MONTH);
+        double fee = ONE_TIME + (3 * FAM_PER_MONTH);
         return fee;
     }
 

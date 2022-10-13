@@ -9,7 +9,7 @@ public class Premium extends Family{
     }
     @Override
     public double membershipFee(){
-        double fee = PER_YEAR-ONE_MONTH;
+        double fee = PER_YEAR - ONE_MONTH;
         return fee;
     }
 
