@@ -119,7 +119,7 @@ public class Member implements Comparable<Member> {
         }
     }
 
-    public double membershipfFee(){
+    public double membershipFee(){
         double fee = ONE_TIME + (3*PER_MONTH);
         return fee;
     }
