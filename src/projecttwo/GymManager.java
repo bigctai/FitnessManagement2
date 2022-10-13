@@ -239,39 +239,27 @@ public class GymManager {
      * @param memberToCheckIn contains member data as elements of an array
      */
     private void checkIn(String[] memberToCheckIn) {
-        if(memberToCheckIn[0].equals("C")) {
+        if(memberToCheckIn[0].equals("C") || memberToCheckIn[0].equals("CG")) {
+            if(memberToCheckIn[0].equals("CG")){
+                System.out.println("still working on it");
+                return;
+            }
+            if(!checkCredentials(memberToCheckIn)) return;
             Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
                     new Date(memberToCheckIn[6])));
-            //Can be called separately in another helper method
-            if(!isValidLocation(memberToCheckIn[3])){
+            if (memToCheckIn == null) {
+                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " " + memberToCheckIn[6] + " is not in the database.");
                 return;
             }
-            if(!isValidInstructor(memberToCheckIn[2])) return;
-            if(!isValidClass(memberToCheckIn[1])) return;
-            if (!isValidDateOfBirth(memToCheckIn.dob())) return;
-            int fitClassIndex = getClassIndex(memberToCheckIn[2], memberToCheckIn[3], memberToCheckIn[1], true);
-            if(fitClassIndex < 0){
+            if (memToCheckIn.expirationDate().compareTo(new Date()) < 0) {
+                System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " membership expired.");
                 return;
-            };
-            Date currentDate = new Date();
-            boolean memExists = false;
-            for (int i = 0; i < memData.size(); i++) {
-                if (memData.returnList()[i].equals(memToCheckIn)) {
-                    if (memData.returnList()[i].expirationDate().compareTo(currentDate) < 0) {
-                        System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " membership expired.");
-                        return;
-                    }
-                    memExists = true;
-                }
             }
+            int fitClassIndex = getClassIndex(memberToCheckIn[2], memberToCheckIn[3], memberToCheckIn[1]);
+            if(fitClassIndex < 0) return;
             FitnessClass classToCheckInto = classSchedule.returnList()[fitClassIndex];
-            if (!memExists) {
-                System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " is not in the database.");
-                return;
-            }
-            if (checkSchedulingConflict(classSchedule.getClass(fitClassIndex), memToCheckIn, true)) {
-                return;
-            }
+            if(checkLocationRestriction(memToCheckIn, classToCheckInto)) return;
+            if (checkSchedulingConflict(classToCheckInto, memToCheckIn, true)) return;
             if (classToCheckInto.checkInMember(memToCheckIn))
                 System.out.println(memToCheckIn.fullName() + " checked in " + classSchedule.returnList()[fitClassIndex].className() + ".");
         }
@@ -285,27 +273,41 @@ public class GymManager {
      * Checks if member's date of birth is valid, if the member is a participant in the class,
      * and if the class exists
      *
-     * @param memberToDrop contains member data as elements of an array
+     * @param memberToDrop contains member data as elements of a String array
      */
     private void dropClass(String[] memberToDrop) {
         if(memberToDrop[0].equals("D")) {
-            Date checkDateOfBirth = new Date(memberToDrop[4]);
-            if (!(checkDateOfBirth.isValid())) {
-                System.out.println("DOB " + memberToDrop[4] + ": invalid calendar date!");
+            if(!checkCredentials(memberToDrop)) return;
+            Member memToDrop = memData.getFullDetails(new Member(memberToDrop[4], memberToDrop[5],
+                    new Date(memberToDrop[6])));
+            if (memToDrop == null) {
+                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " " + memberToDrop[6] + " is not in the database.");
                 return;
             }
-            Member memToDrop = new Member(memberToDrop[2], memberToDrop[3], checkDateOfBirth);
-            int fitClassIndex = getClassIndex(memberToDrop[1], memberToDrop[2], memberToDrop[3], false);
-            if (fitClassIndex < 0) {
+            int fitClassIndex = getClassIndex(memberToDrop[2], memberToDrop[3], memberToDrop[1]);
+            if(fitClassIndex < 0){
+                return;
+            };
+            FitnessClass classToDrop = classSchedule.returnList()[fitClassIndex];
+            if (checkSchedulingConflict(classToDrop, memToDrop, false)) {
                 return;
             }
-            if (classSchedule.getClass(fitClassIndex).dropMem(memToDrop))
-                System.out.println(memberToDrop[2] + " " + memberToDrop[3] + " dropped " + classSchedule.getClass(fitClassIndex).className()
-                        + ".");
+            if (classToDrop.dropMem(memToDrop))
+                System.out.println(memToDrop.fullName() + " done with the class.");
         }
         else{
             System.out.println(memberToDrop[0] + " is an invalid command!");
         }
+    }
+
+    private boolean checkCredentials(String[] memberCredentials){
+        if(!isValidLocation(memberCredentials[3])){
+            return false;
+        }
+        if(!isValidInstructor(memberCredentials[2])) return false;
+        if(!isValidClass(memberCredentials[1])) return false;
+        if (!isValidDateOfBirth(new Date(memberCredentials[6]))) return false;
+        return true;
     }
 
     /**
@@ -315,17 +317,16 @@ public class GymManager {
      * @param className  the inputted class to be searched for
      * @param instructor the inputted instructor to be searched for
      * @param location the inputted location to be searched for
-     * @param checkingIn whether the member is checking in or dropping
      * @return the index of the class if it is found, and they haven't checked in, else ALREADY_CHECKED_IN if
      * they already checked in, else NOT_FOUND
      */
-    private int getClassIndex(String instructor, String location, String className, boolean checkingIn){
+    private int getClassIndex(String instructor, String location, String className){
         int classExists = NOT_FOUND;
         for(int i = 0; i < classSchedule.getNumOfClasses(); i++){
             FitnessClass classPtr = classSchedule.returnList()[i];
             if(classPtr.className().equalsIgnoreCase(className)){
                 if(classPtr.getInstructor().equalsIgnoreCase(instructor)){
-                    if(classPtr.getLocation().toString().equalsIgnoreCase(location)){
+                    if(classPtr.getLocation().name().equalsIgnoreCase(location)){
                         classExists = i;
                         break;
                     }
@@ -351,7 +352,7 @@ public class GymManager {
                 return true;
             }
         }
-        System.out.println(location + ": invalid location!");
+        System.out.println(location + " - invalid location.");
         return false;
     }
 
@@ -372,7 +373,7 @@ public class GymManager {
                 return true;
             }
         }
-        System.out.println(className + " class does not exist.");
+        System.out.println(className + " - class does not exist.");
         return false;
     }
 
@@ -422,6 +423,18 @@ public class GymManager {
         return true;
     }
 
+    private boolean checkLocationRestriction(Member memToCheckIn, FitnessClass classToCheckInto){
+        if(memToCheckIn instanceof Family || memToCheckIn instanceof Premium){
+            return false;
+        }
+        else if(!memToCheckIn.getLocation().equals(classToCheckInto.getLocation())){
+            System.out.println(memToCheckIn.fullName() + " checking in " + classToCheckInto.getLocation().toString()
+                    + " - standard membership location restriction.");
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Checks if the member has a scheduling conflict
      * Checks if the member has already checked in if they are adding and if the member has not checked in if they are dropping
@@ -434,21 +447,23 @@ public class GymManager {
      * @return true if the member has a scheduling conflict, else false
      */
     private boolean checkSchedulingConflict(FitnessClass fitClass, Member memToCheckIn, boolean checkingIn) {
-        if(fitClass.findParticipant(memToCheckIn) >= 0 && checkingIn){
-            System.out.println(memToCheckIn.fullName() + " has already checked in " + fitClass.className());
-            return true;
-        }
-        else if(fitClass.findParticipant(memToCheckIn) < 0 && !checkingIn){
-            System.out.println(memToCheckIn.fullName() + " is not a participant in " + fitClass.className() + ".");
-            return true;
-        }
-        for (int i = 0; i < classSchedule.returnList().length; i++) {
-            if (classSchedule.getClass(i).timeOfClass().equals(fitClass.timeOfClass())
-                    && classSchedule.getClass(i).findParticipant(memToCheckIn) >= 0) {
-                System.out.println(fitClass.className() + " time conflict -- " + memToCheckIn.fullName()
-                        + " has already checked in " + classSchedule.getClass(i).className() + ".");
+        if(checkingIn) {
+            if (fitClass.findParticipant(memToCheckIn) >= 0) {
+                System.out.println(memToCheckIn.fullName() + " has already checked in " + fitClass.className());
                 return true;
             }
+            for (int i = 0; i < classSchedule.returnList().length; i++) {
+                if (classSchedule.getClass(i).timeOfClass().equals(fitClass.timeOfClass())
+                        && classSchedule.getClass(i).findParticipant(memToCheckIn) >= 0) {
+                    System.out.println("Time conflict - " + fitClass.className() + ", " + fitClass.getInstructor() + ", "
+                            + fitClass.timeOfClass().toString() + ", " + fitClass.getLocation().toString() + ".");
+                    return true;
+                }
+            }
+        }
+        else if(fitClass.findParticipant(memToCheckIn) < 0){
+            System.out.println(memToCheckIn.fullName() + " did not check in.");
+            return true;
         }
         return false;
     }

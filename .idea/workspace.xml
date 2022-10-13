@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated ClassSchedule and fixed bugs">
-      <change afterPath="$PROJECT_DIR$/src/testcases.txt" afterDir="false" />
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Created checkLocationRestriction to account for standard member location restriction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +152,35 @@
       <option name="project" value="LOCAL" />
       <updated>1665433398322</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Updated CheckIn method to check for all of values entered for classes">
+      <created>1665649192067</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1665649192067</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated dropClass method">
+      <created>1665680051463</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1665680051463</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated dropClass method">
+      <created>1665680062604</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1665680062604</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Created checkLocationRestriction to account for standard member location restriction">
+      <created>1665680668879</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1665680668879</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,21 +255,9 @@
     <MESSAGE value="Fixed location bug" />
     <MESSAGE value="Created classSchedule file and method to load classes from file" />
     <MESSAGE value="Updated ClassSchedule and fixed bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated ClassSchedule and fixed bugs" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/projecttwo/GymManager.java</url>
-          <line>357</line>
-          <properties class="projecttwo.GymManager" method="isValidInstructor">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Updated CheckIn method to check for all of values entered for classes" />
+    <MESSAGE value="Updated dropClass method" />
+    <MESSAGE value="Created checkLocationRestriction to account for standard member location restriction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created checkLocationRestriction to account for standard member location restriction" />
   </component>
 </project>

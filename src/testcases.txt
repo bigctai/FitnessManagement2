@@ -128,15 +128,3 @@ PF
 q
 Q
 This line is garbage to test the Q command.
-
-
-
-
-
-
-
-
-
-
-
-Displaying Project2_testCases.txt.
