@@ -263,6 +263,9 @@ public class GymManager {
                 System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " is not in the database.");
                 return;
             }
+            if(checkLocationRestriction(memToCheckIn, classToCheckInto)){
+                return;
+            }
             if (checkSchedulingConflict(classToCheckInto, memToCheckIn, true)) {
                 return;
             }
@@ -328,7 +331,7 @@ public class GymManager {
             FitnessClass classPtr = classSchedule.returnList()[i];
             if(classPtr.className().equalsIgnoreCase(className)){
                 if(classPtr.getInstructor().equalsIgnoreCase(instructor)){
-                    if(classPtr.getLocation().toString().equalsIgnoreCase(location)){
+                    if(classPtr.getLocation().name().equalsIgnoreCase(location)){
                         classExists = i;
                         break;
                     }
@@ -423,6 +426,18 @@ public class GymManager {
             }
         }
         return true;
+    }
+
+    private boolean checkLocationRestriction(Member memToCheckIn, FitnessClass classToCheckInto){
+        if(memToCheckIn instanceof Family || memToCheckIn instanceof Premium){
+            return false;
+        }
+        else if(!memToCheckIn.getLocation().equals(classToCheckInto.getLocation())){
+            System.out.println(memToCheckIn.fullName() + " checking in " + classToCheckInto.getLocation().toString()
+                    + " - standard membership location restriction.");
+            return true;
+        }
+        return false;
     }
 
     /**

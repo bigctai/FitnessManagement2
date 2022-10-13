@@ -26,6 +26,16 @@ public enum Location {
         this.county = county;
     }
 
+    @Override
+    /**
+     * Turns the Location into a String
+     *
+     * @return the name of the town, followed by the zip code, followed by the county
+     */
+    public String toString() {
+        return this.name() + ", " + this.zip + ", " + this.county;
+    }
+
     /**
      * Gets the county of the town that the gym is in
      *
