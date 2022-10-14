@@ -240,13 +240,20 @@ public class GymManager {
      */
     private void checkIn(String[] memberToCheckIn) {
         if(memberToCheckIn[0].equals("C") || memberToCheckIn[0].equals("CG")) {
-            if(memberToCheckIn[0].equals("CG")){
-                System.out.println("still working on it");
-                return;
-            }
             if(!checkCredentials(memberToCheckIn)) return;
             Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
                     new Date(memberToCheckIn[6])));
+            if(memberToCheckIn[0].equals("CG")){
+                if(checkGuest(memToCheckIn).equals("Standard")){
+                    System.out.println("Standard membership - guest check-in is not allowed.");
+                } else if(checkGuest(memToCheckIn).equals("Family")){
+                    System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " (guest) checked in " + memberToCheckIn[1].toUpperCase() + " - " + memberToCheckIn[2].toUpperCase() + ", " + memberToCheckIn[1]SPINNING - DENISE, 9:30, BRIDGEWATER");
+                } else if(checkGuest(memToCheckIn).equals("Premium")){
+
+                }
+                System.out.println("still working on it");
+                return;
+            }
             if (memToCheckIn == null) {
                 System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " " + memberToCheckIn[6] + " is not in the database.");
                 return;
@@ -266,6 +273,18 @@ public class GymManager {
         else{
             System.out.println(memberToCheckIn[0] + " is an invalid comand!");
         }
+    }
+
+    private String checkGuest(Member mem){
+        String type = "";
+        if(mem instanceof Family){
+            type = "Family";
+        } else if(mem instanceof Premium){
+            type = "Premium";
+        } else {
+            type = "Standard";
+        }
+        return type;
     }
 
     /**
