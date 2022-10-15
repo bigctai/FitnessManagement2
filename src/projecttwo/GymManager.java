@@ -243,17 +243,6 @@ public class GymManager {
             if(!checkCredentials(memberToCheckIn)) return;
             Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
                     new Date(memberToCheckIn[6])));
-            if(memberToCheckIn[0].equals("CG")){
-                if(checkGuest(memToCheckIn).equals("Standard")){
-                    System.out.println("Standard membership - guest check-in is not allowed.");
-                } else if(checkGuest(memToCheckIn).equals("Family")){
-                    System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " (guest) checked in " + memberToCheckIn[1].toUpperCase() + " - " + memberToCheckIn[2].toUpperCase() + ", " + memberToCheckIn[1]SPINNING - DENISE, 9:30, BRIDGEWATER");
-                } else if(checkGuest(memToCheckIn).equals("Premium")){
-
-                }
-                System.out.println("still working on it");
-                return;
-            }
             if (memToCheckIn == null) {
                 System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " " + memberToCheckIn[6] + " is not in the database.");
                 return;
@@ -269,22 +258,41 @@ public class GymManager {
             if (checkSchedulingConflict(classToCheckInto, memToCheckIn, true)) return;
             if (classToCheckInto.checkInMember(memToCheckIn))
                 System.out.println(memToCheckIn.fullName() + " checked in " + classSchedule.returnList()[fitClassIndex].className() + ".");
+            if(memberToCheckIn[0].equals("CG")){
+                checkGuest(memToCheckIn, memberToCheckIn, classToCheckInto);
+            }
         }
         else{
-            System.out.println(memberToCheckIn[0] + " is an invalid comand!");
+            System.out.println(memberToCheckIn[0] + " is an invalid command!");
         }
     }
 
-    private String checkGuest(Member mem){
-        String type = "";
-        if(mem instanceof Family){
-            type = "Family";
-        } else if(mem instanceof Premium){
-            type = "Premium";
+    private void checkGuest(Member mem, String[] memberToCheckIn, FitnessClass classToCheckInto){
+        if(mem instanceof Family || mem instanceof Premium){
+            if((mem.getLocation().name().equalsIgnoreCase(memberToCheckIn[3]))==false){
+                for (Location locations : Location.values()) {
+                    if (memberToCheckIn[3].toUpperCase().equals(locations.name())) {
+                        System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] +" Guest checking in " + locations.name() + ", " + locations.zipCode() + ", " + locations.county() + " - guest location restriction.");
+                    }
+                }
+            } else if(((Family) mem).getGuestPass()==0 || ((Premium) mem).getGuestPass()==0){
+                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " ran out of guest pass.");
+            } else {
+                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " (guest) checked in " + memberToCheckIn[1].toUpperCase() + " - " + memberToCheckIn[2].toUpperCase() + ", " + classToCheckInto.timeOfClass() + ", " + memberToCheckIn[3].toUpperCase());
+                System.out.println("- Participants -");
+                System.out.println("\t"+mem.toString());
+                System.out.println("- Guests -");
+                System.out.println("\t"+mem.toString());
+                if(mem instanceof Family) {
+                    ((Family) mem).updateGuest();
+                } else {
+                    ((Premium) mem).updateGuest();
+                }
+            }
+
         } else {
-            type = "Standard";
+            System.out.println("Standard membership - guest check-in is not allowed.");
         }
-        return type;
     }
 
     /**

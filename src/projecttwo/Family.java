@@ -18,6 +18,10 @@ public class Family extends Member{
 
     @Override
     public String toString(){
-        return super.toString() + ", (Premium) guest-pass remaining: " + guestPass;
+        return super.toString() + ", (Family) guest-pass remaining: " + guestPass;
     }
+
+    public int getGuestPass() { return guestPass; }
+
+    public void updateGuest() { guestPass--; }
 }
