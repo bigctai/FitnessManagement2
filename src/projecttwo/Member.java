@@ -58,15 +58,6 @@ public class Member implements Comparable<Member> {
         return this.fname + " " + this.lname;
     }
 
-    /**
-     * Gets the county the Member lives in
-     *
-     * @return the county that is part of the Member's location variable
-     */
-    public String county() {
-        return this.location.county();
-    }
-
     public Location getLocation(){return this.location;}
     public Date dob() {return this.dob;}
 

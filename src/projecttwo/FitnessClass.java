@@ -42,7 +42,7 @@ public class FitnessClass {
      *
      * @return className as a String
      */
-    public String className() {
+    public String getClassName() {
         return this.className;
     }
 

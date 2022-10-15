@@ -257,7 +257,7 @@ public class GymManager {
             if(checkLocationRestriction(memToCheckIn, classToCheckInto)) return;
             if (checkSchedulingConflict(classToCheckInto, memToCheckIn, true)) return;
             if (classToCheckInto.checkInMember(memToCheckIn))
-                System.out.println(memToCheckIn.fullName() + " checked in " + classSchedule.returnList()[fitClassIndex].className() + ".");
+                System.out.println(memToCheckIn.fullName() + " checked in " + classSchedule.returnList()[fitClassIndex].getClassName() + ".");
             if(memberToCheckIn[0].equals("CG")){
                 checkGuest(memToCheckIn, memberToCheckIn, classToCheckInto);
             }
@@ -351,7 +351,7 @@ public class GymManager {
         int classExists = NOT_FOUND;
         for(int i = 0; i < classSchedule.getNumOfClasses(); i++){
             FitnessClass classPtr = classSchedule.returnList()[i];
-            if(classPtr.className().equalsIgnoreCase(className)){
+            if(classPtr.getClassName().equalsIgnoreCase(className)){
                 if(classPtr.getInstructor().equalsIgnoreCase(instructor)){
                     if(classPtr.getLocation().name().equalsIgnoreCase(location)){
                         classExists = i;
@@ -396,7 +396,7 @@ public class GymManager {
 
     private boolean isValidClass(String className) {
         for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
-            if(className.equalsIgnoreCase(classSchedule.returnList()[i].className())){
+            if(className.equalsIgnoreCase(classSchedule.returnList()[i].getClassName())){
                 return true;
             }
         }
@@ -476,13 +476,13 @@ public class GymManager {
     private boolean checkSchedulingConflict(FitnessClass fitClass, Member memToCheckIn, boolean checkingIn) {
         if(checkingIn) {
             if (fitClass.findParticipant(memToCheckIn) >= 0) {
-                System.out.println(memToCheckIn.fullName() + " has already checked in " + fitClass.className());
+                System.out.println(memToCheckIn.fullName() + " has already checked in " + fitClass.getClassName());
                 return true;
             }
             for (int i = 0; i < classSchedule.returnList().length; i++) {
                 if (classSchedule.getClass(i).timeOfClass().equals(fitClass.timeOfClass())
                         && classSchedule.getClass(i).findParticipant(memToCheckIn) >= 0) {
-                    System.out.println("Time conflict - " + fitClass.className() + ", " + fitClass.getInstructor() + ", "
+                    System.out.println("Time conflict - " + fitClass.getClassName() + ", " + fitClass.getInstructor() + ", "
                             + fitClass.timeOfClass().toString() + ", " + fitClass.getLocation().toString() + ".");
                     return true;
                 }
