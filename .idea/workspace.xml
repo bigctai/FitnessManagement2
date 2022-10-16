@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Created checkLocationRestriction to account for standard member location restriction">
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Fixed redundant code and started guest feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Time.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665680668879</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fixed redundant code and started guest feature">
+      <created>1665873755395</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1665873755395</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -232,6 +243,11 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
                   <option value="chris" />
                 </option>
               </RecentGroup>
@@ -258,6 +274,7 @@
     <MESSAGE value="Updated CheckIn method to check for all of values entered for classes" />
     <MESSAGE value="Updated dropClass method" />
     <MESSAGE value="Created checkLocationRestriction to account for standard member location restriction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created checkLocationRestriction to account for standard member location restriction" />
+    <MESSAGE value="Fixed redundant code and started guest feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed redundant code and started guest feature" />
   </component>
 </project>

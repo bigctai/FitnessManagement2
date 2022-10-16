@@ -8,11 +8,11 @@ package projecttwo;
  * @author Chris Tai, Shreyank Yelagoila
  */
 public class Member implements Comparable<Member> {
-    private String fname;
-    private String lname;
-    private Date dob;
-    private Date expire;
-    private Location location;
+    protected String fname;
+    protected String lname;
+    protected Date dob;
+    protected Date expire;
+    protected Location location;
     public static final int EARLIER = -1;
     private static final double ONE_TIME = 29.99;
     private static final double PER_MONTH = 39.99;

@@ -212,9 +212,7 @@ public class MemberDatabase {
 
     public void printWithFees(){
         for(int i = 0; i < size; i++){
-            if(mlist[i].membershipFee() > 0){
-                System.out.println(mlist[i].toString());
-            }
+            System.out.println(mlist[i].toString() + ", Membership fee: $" + mlist[i].membershipFee());
         }
     }
 }

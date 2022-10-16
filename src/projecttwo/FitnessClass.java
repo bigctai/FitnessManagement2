@@ -35,6 +35,7 @@ public class FitnessClass {
         this.participants = participants;
         this.gymLocation = gymLocation;
         this.size = this.participants.length;
+        guests = new ArrayList<Member>();
     }
 
     /**
@@ -65,15 +66,9 @@ public class FitnessClass {
      * Prints out the name of the class, instructor, and the time of the class, followed by each participant
      */
     public void printClass() {
-        DecimalFormat formatTime = new DecimalFormat("00");
-        System.out.println(className.toUpperCase() + " - " + instructor.toUpperCase() + ", " + timeOfClass.hour() + ":"
-                + formatTime.format(timeOfClass.minute()) + ", " + gymLocation);
-        if (participants.length > 0) {
-            System.out.println("\t** participants **");
-            for (int i = 0; i < size; i++) {
-                System.out.println("\t\t" + participants[i].toString());
-            }
-        }
+        System.out.println(className.toUpperCase() + " - " + instructor.toUpperCase() + ", " +
+                timeOfClass.hourAndMinute() + ", " + gymLocation);
+        printParticipants();
     }
 
     /**
@@ -136,6 +131,32 @@ public class FitnessClass {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void addGuest(Member guest){
+        guests.add(guest);
+    }
+
+    public void removeGuest(Member guest){
+        guests.remove(guest);
+    }
+
+    public void printParticipantsAndGuests(){
+        printParticipants();
+        System.out.println("- Guests -");
+        for(Member guest : guests){
+            System.out.println("\t" + guest.toString());
+        }
+        System.out.println();
+    }
+
+    private void printParticipants(){
+        if (participants.length > 0) {
+            System.out.println("- Participants -");
+            for (int i = 0; i < size; i++) {
+                System.out.println("\t" + participants[i].toString());
+            }
         }
     }
 }

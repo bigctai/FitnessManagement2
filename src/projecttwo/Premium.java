@@ -2,12 +2,10 @@ package projecttwo;
 
 public class Premium extends Family{
 
-    private int guestPass;
     private static final double PER_YEAR = 719.88;
     private static final double ONE_MONTH = 59.99;
     public Premium(String fname, String lname, Date dob, Date expire, Location location, int guestPass){
         super(fname, lname, dob, expire, location, guestPass);
-
     }
     @Override
     public double membershipFee(){
@@ -16,10 +14,17 @@ public class Premium extends Family{
     }
 
     public String toString(){
-        return super.toString() + ", (Premium) guest-pass remaining: " + guestPass;
+        return super.toString();
+    }
+
+    @Override
+    protected String getClassName(){
+        return "(Premium) Guess-pass remaining";
     }
 
     public int getGuestPass() { return guestPass; }
 
-    public void updateGuest() { guestPass--; }
+    public void guestIn() { guestPass--; }
+
+    public void guestOut(){guestPass++;}
 }

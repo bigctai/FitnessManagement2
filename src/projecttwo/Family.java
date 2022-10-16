@@ -2,7 +2,7 @@ package projecttwo;
 
 public class Family extends Member{
 
-    private int guestPass;
+    protected int guestPass;
     private static final double ONE_TIME = 29.99;
     private static final double FAM_PER_MONTH = 59.99;
     public Family(String fname, String lname, Date dob, Date expire, Location location, int guestPass){
@@ -18,10 +18,16 @@ public class Family extends Member{
 
     @Override
     public String toString(){
-        return super.toString() + ", (Family) guest-pass remaining: " + guestPass;
+        return super.toString() + ", " + getClassName() + ": " + guestPass;
+    }
+
+    protected String getClassName(){
+        return "(Family) guest-pass remaining";
     }
 
     public int getGuestPass() { return guestPass; }
 
-    public void updateGuest() { guestPass--; }
+    public void guestIn() { guestPass--; }
+
+    public void guestOut(){guestPass++;}
 }
