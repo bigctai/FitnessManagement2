@@ -86,9 +86,16 @@ public class Member implements Comparable<Member> {
      * @return the string of the member
      */
     public String toString() {
+        String expirationStatus;
+        if(expire.compareTo(new Date()) < 0){
+            expirationStatus = "Membership expired";
+        }
+        else{
+            expirationStatus = "Membership expires";
+        }
         if (expire != null && location != null) {
             return fname + " " + lname + ", " + "DOB: " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear() + ", " +
-                    "Membership expires " + expire.getMonth() + "/" + expire.getDay() + "/" + expire.getYear() + ", " +
+                    expirationStatus + " " + expire.getMonth() + "/" + expire.getDay() + "/" + expire.getYear() + ", " +
                     "Location: " + location.toString() + ", " + location.zipCode() + ", " + location.county();
         } else {
             return fname + " " + lname + ", " + "DOB: " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear();
