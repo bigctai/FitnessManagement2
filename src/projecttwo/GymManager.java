@@ -88,6 +88,7 @@ public class GymManager {
             System.out.println("-end of list-");
         }
         catch (FileNotFoundException exception) {
+            System.out.println(exception.toString());
         }
     }
 
@@ -106,7 +107,7 @@ public class GymManager {
             System.out.println("-end of class list-");
         }
         catch(FileNotFoundException exception){
-
+            System.out.println(exception.toString());
         }
     }
 
