@@ -139,11 +139,11 @@ public class MemberDatabase {
         for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
                 Member tempSmallest = null;
-                if (mlist[i].county().compareTo(mlist[j].county()) > 0) {
+                if (mlist[i].getLocation().county().compareTo(mlist[j].getLocation().county()) > 0) {
                     tempSmallest = mlist[i];
                     mlist[i] = mlist[j];
                     mlist[j] = tempSmallest;
-                } else if (mlist[i].county().compareTo(mlist[j].county()) == 0 &&
+                } else if (mlist[i].getLocation().county().compareTo(mlist[j].getLocation().county()) == 0 &&
                         Integer.parseInt(mlist[j].zipCode()) <= Integer.parseInt(mlist[i].zipCode())) {
                     tempSmallest = mlist[i];
                     mlist[i] = mlist[j];
@@ -212,9 +212,7 @@ public class MemberDatabase {
 
     public void printWithFees(){
         for(int i = 0; i < size; i++){
-            if(mlist[i].membershipFee() > 0){
-                System.out.println(mlist[i].toString());
-            }
+            System.out.println(mlist[i].toString() + ", Membership fee: $" + mlist[i].membershipFee());
         }
     }
 }

@@ -1,5 +1,7 @@
 package projecttwo;
 
+import java.text.DecimalFormat;
+
 /**
  * Creates a Time constant specifying the times of classes with hour and minute variables
  *
@@ -21,21 +23,9 @@ public enum Time {
         this.minute = minute;
     }
 
-    /**
-     * Gets the hour of the Time object
-     *
-     * @return hour as an integer
-     */
-    public int hour() {
-        return this.hour;
+    public String hourAndMinute(){
+        DecimalFormat formatTime = new DecimalFormat("00");
+        return this.hour + ":" + formatTime.format(this.minute);
     }
 
-    /**
-     * Gets the minute of the Time object
-     *
-     * @return minute as an integer
-     */
-    public int minute() {
-        return this.minute;
-    }
 }
