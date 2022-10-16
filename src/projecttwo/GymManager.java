@@ -146,6 +146,13 @@ public class GymManager {
             System.out.println(memToAdd.fullName() + " added.");
     }
 
+    /**
+     * Creates a member using the information inputted
+     * Determines if the member created is Premium or Family
+     * @param memberToAdd the information about the member held in an array of Strings
+     * @param fromFile determines whether the Member is added from file or command line
+     * @return
+     */
     private Member createMember(String[] memberToAdd, boolean fromFile){
         String firstName;
         String lastName;
@@ -174,24 +181,6 @@ public class GymManager {
         }
         expirationDate.setExpire();
         return new Member(firstName, lastName, dob, expirationDate, location);
-    }
-
-    private Family createFamilyMember(String[] memberToAdd){
-        String firstName = memberToAdd[0];
-        String lastName = memberToAdd[1];
-        Date dob = new Date(memberToAdd[2]);
-        Date expirationDate = new Date(memberToAdd[3]);
-        Location location = Location.valueOf(memberToAdd[4]);
-        return new Family(firstName, lastName, dob, expirationDate, location, 1);
-    }
-
-    private Premium createPremiumMember(String[] memberToAdd){
-        String firstName = memberToAdd[0];
-        String lastName = memberToAdd[1];
-        Date dob = new Date(memberToAdd[2]);
-        Date expirationDate = new Date(memberToAdd[3]);
-        Location location = Location.valueOf(memberToAdd[4]);
-        return new Premium(firstName, lastName, dob, expirationDate, location, 1);
     }
 
     /**
