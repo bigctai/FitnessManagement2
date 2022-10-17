@@ -17,6 +17,15 @@ public class FitnessClass {
     private ArrayList<Member> guests;
     private int size;
     private final int NOT_FOUND = -1;
+    private final int EXPIRED = -2;
+    private final int WRONG_LOCATION = -3;
+    private final int DUPLICATE = -4;
+    private final int CONFLICT = -5;
+    private final int WRONG_GUEST_LOCATION = -6;
+    private final int NO_MORE_GUEST = -7;
+    private final int STANDARD = -8;
+    private final int NOT_CHECKED_IN = -9;
+    private final int INVALID_DATE = -10;
 
     /**
      * Initializes a projectone.FitnessClass that has a time, an instructor, a name, and
@@ -94,32 +103,31 @@ public class FitnessClass {
     /**
      * Adds a member to the end of the array
      *
-     * @param memberInfo the information of the member trying to check into the class
+     * @param memToCheckIn the member trying to check into the class
      * @return true if the member is added successfully
      */
-    public int checkInMember(String[] memberInfo, ClassSchedule classes, MemberDatabase memData) {
+    public int checkInMember(Member memToCheckIn, ClassSchedule classes) {
         if (size == participants.length) {
             grow();
         }
-        if(!new Date(memberInfo[6]).isValid()){
-            return -10;
+        if(!memToCheckIn.dob().isValid()){
+            return INVALID_DATE;
         }
-        Member memToCheckIn = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5],
-                new Date(memberInfo[6])));
+
         if (memToCheckIn == null) {
-            return -1;
+            return NOT_FOUND;
         }
         if (memToCheckIn.expirationDate().compareTo(new Date()) < 0) {
-            return -2;
+            return EXPIRED;
         }
         if(checkLocationRestriction(memToCheckIn)){
-            return -3;
+            return WRONG_LOCATION;
         }
         if (findParticipant(memToCheckIn) >= 0) {
-            return -4;
+            return DUPLICATE;
         }
         if(checkSchedulingConflict(classes, memToCheckIn)){
-            return -5;
+            return CONFLICT;
         }
         participants[size] = memToCheckIn;
         size++;
@@ -128,16 +136,16 @@ public class FitnessClass {
     public int checkGuest(Member mem){
         if(mem instanceof Family || mem instanceof Premium){
             if(!(mem.getLocation().toString().equalsIgnoreCase(gymLocation.toString()))){
-                return -6;
+                return WRONG_GUEST_LOCATION;
             } else if(((Family) mem).getGuestPass() == 0){
-                return -7;
+                return NO_MORE_GUEST;
             } else {
                 ((Family) mem).guestIn();
                 guests.add(mem);
                 return 0;
             }
         } else {
-            return -8;
+            return STANDARD;
         }
     }
 
@@ -173,17 +181,16 @@ public class FitnessClass {
     /**
      * Removes a member from a class's participants
      *
-     * @param memberInfo the information of the member trying to drop the class
+     * @param memToDrop the member trying to drop the class
      * @return true if the member is successfully removed, false otherwise
      */
-    public int dropMem(String[] memberInfo, MemberDatabase memData) {
-        Member memToDrop = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5],
-                new Date(memberInfo[6])));
+    public int dropMem(Member memToDrop) {
+
         if (memToDrop == null) {
-            return -8;
+            return NOT_FOUND;
         }
         else if(findParticipant(memToDrop) < 0){
-            return -9;
+            return NOT_CHECKED_IN;
         }
         else{
             int index = findParticipant(memToDrop);
@@ -202,3 +209,5 @@ public class FitnessClass {
         guests.remove(guest);
     }
 }
+
+

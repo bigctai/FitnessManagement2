@@ -8,5 +8,6 @@ public class PremiumTest {
 
     @Test
     public void membershipFee() {
+
     }
 }
