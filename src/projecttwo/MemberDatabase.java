@@ -121,6 +121,12 @@ public class MemberDatabase {
         System.out.println("-end of list-\n");
     }
 
+    /**
+     * Gets the full details of a member by finding the member in the member list array
+     *
+     * @param mem the member whose details are to be returned
+     * @return the member from the member list array
+     */
     public Member getFullDetails(Member mem) {
         if (find(mem) >= 0) return mlist[find(mem)];
         else {
@@ -210,6 +216,10 @@ public class MemberDatabase {
         System.out.println("-end of list-\n");
     } //sort by last name and then first name
 
+    /**
+     * Prints the list of members in the member list array with their
+     * corresponding membership fee from beginning to end
+     */
     public void printWithFees(){
         if (size == 0) {
             System.out.println("Member database is empty!");

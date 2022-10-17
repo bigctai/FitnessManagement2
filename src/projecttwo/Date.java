@@ -116,8 +116,18 @@ public class Date implements Comparable<Date> {
         return day;
     }
 
+    /**
+     * Prints the date in mm/dd/yyyy format
+     *
+     * @return the date as a string
+     */
     public String dateString(){ return this.month + "/" + this.day + "/" + this.year;}
 
+    /**
+     * Sets the expiration date of the members membership
+     *
+     * @param membershipLife the length of the members membership before it is supposed to expire
+     */
     public void setExpire(int membershipLife){
         int rawTime = month + membershipLife;
         if(rawTime > 12){
