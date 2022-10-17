@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Defines a class for members to check in to, with a time, instructor and an array of participants
- * Has methods for printing out the class schedule, finding members checked into each class,
- * checking members in, and dropping members
+ * Has methods for finding members checked into each class, checking members in, and dropping members
  * @author Chris Tai, Shreyank Yelagoila
  */
 public class FitnessClass {
@@ -54,12 +53,10 @@ public class FitnessClass {
     public String getClassName() {
         return this.className;
     }
-
     public Location getLocation(){ return gymLocation;}
     public String getInstructor(){
         return instructor;
     }
-
     public Member[] getParticipants(){return participants;}
     public int getSize(){return size;}
     public ArrayList<Member> getGuests(){return guests;}
@@ -184,7 +181,6 @@ public class FitnessClass {
      * @return true if the member is successfully removed, false otherwise
      */
     public int dropMem(Member memToDrop) {
-
         if (memToDrop == null) {
             return NOT_FOUND;
         }
@@ -198,14 +194,24 @@ public class FitnessClass {
             }
             participants[findParticipant(memToDrop)] = participants[size - 1];
             participants[size - 1] = null;
-            size--;
+            decrementSize();
             return 0;
         }
     }
 
-    public void removeGuest(Member guest){
-        ((Family) guest).guestOut();
-        guests.remove(guest);
+    public void decrementSize(){
+        size--;
+    }
+
+    public int removeGuest(Member guest){
+        if(!guests.contains(guest)){
+            return NOT_CHECKED_IN;
+        }
+        else {
+            ((Family) guest).guestOut();
+            guests.remove(guest);
+            return 0;
+        }
     }
 }
 
