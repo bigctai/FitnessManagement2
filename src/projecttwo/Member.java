@@ -58,7 +58,18 @@ public class Member implements Comparable<Member> {
         return this.fname + " " + this.lname;
     }
 
+    /**
+     * Gets the location that this member is registered at
+     *
+     * @return the location variable as location
+     */
     public Location getLocation(){return this.location;}
+
+    /**
+     * Gets the members date of birth
+     *
+     * @return the dob variable as a date
+     */
     public Date dob() {return this.dob;}
 
     /**
@@ -117,6 +128,11 @@ public class Member implements Comparable<Member> {
         }
     }
 
+    /**
+     * Gets the membership fee of a standard membership
+     *
+     * @return the location variable as location
+     */
     public double membershipFee(){
         double fee = ONE_TIME + (3*PER_MONTH);
         return fee;
