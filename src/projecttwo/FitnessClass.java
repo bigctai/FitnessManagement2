@@ -107,11 +107,11 @@ public class FitnessClass {
         if (size == participants.length) {
             grow();
         }
-        if (memToCheckIn == null) {
-            return NOT_FOUND;
-        }
         if(!memToCheckIn.dob().isValid()){
             return INVALID_DATE;
+        }
+        if (memToCheckIn.getLocation() == null) {
+            return NOT_FOUND;
         }
         if (memToCheckIn.expirationDate().compareTo(new Date()) < 0) {
             return EXPIRED;
@@ -181,7 +181,10 @@ public class FitnessClass {
      * @return true if the member is successfully removed, false otherwise
      */
     public int dropMem(Member memToDrop) {
-        if (memToDrop == null) {
+        if(!memToDrop.dob().isValid()){
+            return INVALID_DATE;
+        }
+        if (memToDrop.getLocation() == null) {
             return NOT_FOUND;
         }
         else if(findParticipant(memToDrop) < 0){

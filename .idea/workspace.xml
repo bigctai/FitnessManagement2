@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="updated tests">
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated expiration dates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Date.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +284,28 @@
       <option name="project" value="LOCAL" />
       <updated>1666030583895</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="updated tests">
+      <created>1666032982393</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1666032982393</updated>
+    </task>
+    <task id="LOCAL-00032" summary="updated tests">
+      <created>1666033049351</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1666033049351</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Updated expiration dates">
+      <created>1666036135338</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1666036135338</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -348,7 +372,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Created ClassSchedule" />
     <MESSAGE value="Updated loadMembers" />
     <MESSAGE value="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line" />
     <MESSAGE value="Created constructors for Family and Premium classes, along with membershipFee method" />
@@ -373,19 +396,20 @@
     <MESSAGE value="Updated test cases" />
     <MESSAGE value="Started PremiumTest" />
     <MESSAGE value="updated tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated tests" />
+    <MESSAGE value="Updated expiration dates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated expiration dates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java</url>
-          <line>215</line>
+          <line>213</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java</url>
-          <line>122</line>
+          <line>120</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

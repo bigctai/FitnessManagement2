@@ -32,7 +32,6 @@ public class Date implements Comparable<Date> {
     public final int THIRTY_FIRST = 31;
     public final int TWENTY_EIGHTH = 28;
     public final int TWENTY_NINTH = 29;
-    private final int EXPIRATION = 3;
 
 
     /**
@@ -42,6 +41,7 @@ public class Date implements Comparable<Date> {
         Calendar cal = Calendar.getInstance();
         this.day = cal.get(Calendar.DAY_OF_MONTH);
         this.month = cal.get(Calendar.MONTH);
+        this.month++;
         this.year = cal.get(Calendar.YEAR);
     } //create an object with today’s date (see Calendar class)
 
@@ -118,8 +118,15 @@ public class Date implements Comparable<Date> {
 
     public String dateString(){ return this.month + "/" + this.day + "/" + this.year;}
 
-    public void setExpire(){
-        month += EXPIRATION;
+    public void setExpire(int membershipLife){
+        int rawTime = month + membershipLife;
+        if(rawTime > 12){
+            month = rawTime - 12;
+            year += rawTime / 12;
+        }
+        else {
+            month += membershipLife;
+        }
     }
 
     /**

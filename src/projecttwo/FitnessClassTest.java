@@ -28,15 +28,15 @@ public class FitnessClassTest {
     }
 
     /**
-     * Tests the checkInMember method to see if the dob is invalid.
+     * Tests the checkInMember and dropMem methods to see if the dob is invalid.
      * Will return -10 if dob is invalid.
      */
     @Test
-    public void testInvalidDateCheckInMember() {
+    public void testInvalidDate() {
         Member mem = new Member ("John", "Doe", new Date("1/32/2000"), new Date("1/30/2023"), Location.BRIDGEWATER);
         memData.add(mem);
         FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        classes.addClass(testClass);
+        assertEquals(-10, testClass.dropMem(mem));
         assertEquals(-10, testClass.checkInMember(mem, classes));
     }
 
