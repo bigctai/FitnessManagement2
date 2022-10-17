@@ -14,10 +14,6 @@ public class ClassSchedule {
         return classes;
     }
 
-    public FitnessClass getClass(int indexOfClass){
-        return classes[indexOfClass];
-    }
-
     public int getNumOfClasses(){
         return numOfClasses;
     }

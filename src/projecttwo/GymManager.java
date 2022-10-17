@@ -101,7 +101,8 @@ public class GymManager {
                 String [] classInputData = classScanner.nextLine().split(" ");
                 FitnessClass fitClass = new FitnessClass(Time.valueOf(classInputData[2].toUpperCase()),
                         classInputData[1], classInputData[0], Location.valueOf(classInputData[3].toUpperCase()), new Member[0]);
-                fitClass.printClass();
+                printClass(fitClass);
+                System.out.println();
                 classSchedule.addClass(fitClass);
             }
             System.out.println("-end of class list-");
@@ -205,7 +206,7 @@ public class GymManager {
         if(input.equals("S")) {
             System.out.println("-Fitness classes-");
             for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
-                classSchedule.getClass(i).printClass();
+                printClass(classSchedule.returnList()[i]);
             }
             System.out.println();
         }
@@ -251,11 +252,12 @@ public class GymManager {
             }
             else if(checkConditions == -5){
                 System.out.println("Time conflict - " + classToCheckInto.getClassName().toUpperCase() + " - " + classToCheckInto.getInstructor().toUpperCase() + ", "
-                        + classToCheckInto.timeOfClass().toString() + ", " + classToCheckInto.getLocation().toString() + ".");
+                        + classToCheckInto.getTimeOfClass().toString() + ", " + classToCheckInto.getLocation().toString() + ".");
             }
             else{
-                System.out.println(memberName + " checked in " + classToCheckInto.getClassName() + classToCheckInto.getInstructor() +
-                        classToCheckInto.timeOfClass() + ", " + classToCheckInto.getLocation().name() + ".");
+                System.out.print(memberName + " checked in ");
+                printClass(classToCheckInto);
+                System.out.println();
             }
         }
         else{
@@ -276,9 +278,9 @@ public class GymManager {
             System.out.println("Standard membership - guest check-in is not allowed");
         }
         else{
-            System.out.println(mem.fullName() + " (guest) checked in " + fitClass.getClassName().toUpperCase() + " - " +
-                    fitClass.getInstructor().toUpperCase() + ", " + fitClass.timeOfClass().hourAndMinute() + ", " + fitClass.getLocation().name());
-            fitClass.printParticipantsAndGuests();
+            System.out.print(mem.fullName() + " (guest) checked in ");
+            printClass(fitClass);
+            System.out.println();
         }
     }
 
@@ -295,7 +297,7 @@ public class GymManager {
             int fitClassIndex = getClassIndex(memberToDrop[2], memberToDrop[3], memberToDrop[1]);
             if(fitClassIndex < 0){
                 return;
-            };
+            }
             FitnessClass classToDrop = classSchedule.returnList()[fitClassIndex];
             if(memberToDrop[0].equals("DG")){
                 dropGuest(memberToDrop, classToDrop);
@@ -468,6 +470,25 @@ public class GymManager {
                 memData.printWithFees();
                 break;
         }
-
+    }
+    /**
+     * Prints out the class along with the participants in it
+     * Prints out the name of the class, instructor, and the time of the class, followed by each participant
+     */
+    public void printClass(FitnessClass fitClass) {
+        System.out.println(fitClass.getClassName().toUpperCase() + " - " + fitClass.getInstructor().toUpperCase() + ", " +
+                fitClass.getTimeOfClass().hourAndMinute() + ", " + fitClass.getLocation());
+        if (fitClass.getSize() > 0) {
+            System.out.println("- Participants -");
+            for (int i = 0; i < fitClass.getSize(); i++) {
+                System.out.println("\t" + fitClass.getParticipants()[i].toString());
+            }
+        }
+        if(fitClass.getGuests().size() > 0) {
+            System.out.println("- Guests -");
+            for (Member guest : fitClass.getGuests()) {
+                System.out.println("\t" + guest.toString());
+            }
+        }
     }
 }
