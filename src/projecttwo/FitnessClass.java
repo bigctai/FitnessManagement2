@@ -35,7 +35,7 @@ public class FitnessClass {
         this.participants = participants;
         this.gymLocation = gymLocation;
         this.size = this.participants.length;
-        guests = new ArrayList<Member>();
+        guests = new ArrayList<>();
     }
 
     /**
@@ -101,44 +101,112 @@ public class FitnessClass {
     /**
      * Adds a member to the end of the array
      *
-     * @param mem valid member to add to the array
+     * @param memberInfo the information of the member trying to check into the class
      * @return true if the member is added successfully
      */
-    public boolean checkInMember(Member mem) {
+    public int checkInMember(String[] memberInfo, ClassSchedule classes, MemberDatabase memData) {
         if (size == participants.length) {
             grow();
         }
-        participants[size] = mem;
+        if(!new Date(memberInfo[6]).isValid()){
+            return -10;
+        }
+        Member memToCheckIn = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5],
+                new Date(memberInfo[6])));
+        if (memToCheckIn == null) {
+            return -1;
+        }
+        if (memToCheckIn.expirationDate().compareTo(new Date()) < 0) {
+            return -2;
+        }
+        if(checkLocationRestriction(memToCheckIn)){
+            return -3;
+        }
+        if (findParticipant(memToCheckIn) >= 0) {
+            return -4;
+        }
+        if(checkSchedulingConflict(classes, memToCheckIn)){
+            return -5;
+        }
+        participants[size] = memToCheckIn;
         size++;
-        return true;
+        return 0;
+    }
+    public int checkGuest(Member mem){
+        if(mem instanceof Family || mem instanceof Premium){
+            if(!(mem.getLocation().toString().equalsIgnoreCase(gymLocation.toString()))){
+                return -6;
+            } else if(((Family) mem).getGuestPass() == 0){
+                System.out.println(mem.fullName() + " ran out of guest pass.");
+                return -7;
+            } else {
+                ((Family) mem).guestIn();
+                guests.add(mem);
+                return 0;
+            }
+        } else {
+            return -8;
+        }
+    }
+
+    private boolean checkLocationRestriction(Member memToCheckIn){
+        if(memToCheckIn instanceof Family || memToCheckIn instanceof Premium){
+            return false;
+        }
+        else if(!memToCheckIn.getLocation().equals(gymLocation)){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the member has a scheduling conflict
+     * If the member has checked into another class that is at the same time as the class they are trying to
+     * check into, then they have a scheduling conflict
+     *
+     * @param classes     the dataabase of classes to compare against
+     * @param memToCheckIn the member who is trying to check in
+     * @return true if the member has a scheduling conflict, else false
+     */
+    private boolean checkSchedulingConflict(ClassSchedule classes, Member memToCheckIn) {
+        for (int i = 0; i < classes.returnList().length; i++) {
+            if (classes.getClass(i).timeOfClass().equals(timeOfClass)
+                    && classes.getClass(i).findParticipant(memToCheckIn) >= 0) {
+                    return true;
+                }
+            }
+        return false;
     }
 
     /**
      * Removes a member from a class's participants
      *
-     * @param mem valid member to remove from the array
+     * @param memberInfo the information of the member trying to drop the class
      * @return true if the member is successfully removed, false otherwise
      */
-    public boolean dropMem(Member mem) {
-        int index = findParticipant(mem);
-        if (index >= 0) {
+    public int dropMem(String[] memberInfo, MemberDatabase memData) {
+        Member memToDrop = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5],
+                new Date(memberInfo[6])));
+        if (memToDrop == null) {
+            return -8;
+        }
+        else if(findParticipant(memToDrop) < 0){
+            return -9;
+        }
+        else{
+            int index = findParticipant(memToDrop);
             for (int i = index; i < size; i++) {
                 participants[i] = participants[i++];
             }
-            participants[findParticipant(mem)] = participants[size - 1];
+            participants[findParticipant(memToDrop)] = participants[size - 1];
             participants[size - 1] = null;
             size--;
-            return true;
-        } else {
-            return false;
+            return 0;
         }
     }
 
-    public void addGuest(Member guest){
-        guests.add(guest);
-    }
-
     public void removeGuest(Member guest){
+        ((Family) guest).guestOut();
         guests.remove(guest);
     }
 

@@ -123,13 +123,10 @@ public class GymManager {
             System.out.println(memberToAdd[0] + " is an invalid command!");
             return;
         }
-        if(!isValidLocation(memberToAdd[4])){
+        if(!checkMemberCredentials(memberToAdd[4], memberToAdd[3])){
             return;
         }
         Member memToAdd = createMember(memberToAdd, false);
-        Date currentDate = new Date();
-        Date expirationDate = currentDate;
-        expirationDate.setExpire();
         for (int i = 0; i < memData.size(); i++) {
             if (memData.returnList()[i].equals(memToAdd)) {
                 System.out.println(memToAdd.fullName() + " is already in the database.");
@@ -137,10 +134,6 @@ public class GymManager {
             }
         }
         if (!isOldEnough(memToAdd.dob())) {
-            return;
-        }
-        if (!(memToAdd.dob().isValid())) {
-            System.out.println("DOB " + memberToAdd[3] + ": invalid calendar date!");
             return;
         }
         if (memData.add(memToAdd))
@@ -230,49 +223,62 @@ public class GymManager {
      */
     private void checkIn(String[] memberToCheckIn) {
         if(memberToCheckIn[0].equals("C") || memberToCheckIn[0].equals("CG")) {
-            if(!checkCredentials(memberToCheckIn)) return;
-            Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
-                    new Date(memberToCheckIn[6])));
-            if (memToCheckIn == null) {
-                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " " + memberToCheckIn[6] + " is not in the database.");
-                return;
-            }
-            if (memToCheckIn.expirationDate().compareTo(new Date()) < 0) {
-                System.out.println(memToCheckIn.fullName() + " " + memToCheckIn.dob().dateString() + " membership expired.");
-                return;
-            }
+            if(!checkClassCredentials(memberToCheckIn)) return;
             int fitClassIndex = getClassIndex(memberToCheckIn[2], memberToCheckIn[3], memberToCheckIn[1]);
             if(fitClassIndex < 0) return;
             FitnessClass classToCheckInto = classSchedule.returnList()[fitClassIndex];
             if(memberToCheckIn[0].equals("CG")){
-                checkGuest(memToCheckIn, classToCheckInto);
+                checkGuest(memberToCheckIn, classToCheckInto);
                 return;
             }
-            if(checkLocationRestriction(memToCheckIn, classToCheckInto)) return;
-            if (checkSchedulingConflict(classToCheckInto, memToCheckIn, true)) return;
-            if (classToCheckInto.checkInMember(memToCheckIn))
-                System.out.println(memToCheckIn.fullName() + " checked in " + classSchedule.returnList()[fitClassIndex].getClassName() + ".");
+            int checkConditions = classToCheckInto.checkInMember(memberToCheckIn, classSchedule, memData);
+            String memberName = memberToCheckIn[4] + " " + memberToCheckIn[5];
+            if(checkConditions == -10){
+                System.out.println("DOB " + memberToCheckIn[6] + ": invalid calendar date!");
+            }
+            if(checkConditions == -1){
+                System.out.println(memberName + " " + memberToCheckIn[6] + " is not in the database.");
+            }
+            else if(checkConditions == -2){
+                System.out.println(memberName + " " + memberToCheckIn[6] + " membership expired.");
+            }
+            else if(checkConditions == -3){
+                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " checking in " +
+                        classToCheckInto.getLocation().toString() + " - standard membership location restriction.");
+            }
+            else if(checkConditions == -4){
+                System.out.println(memberName + " already checked in.");
+            }
+            else if(checkConditions == -5){
+                System.out.println("Time conflict - " + classToCheckInto.getClassName().toUpperCase() + " - " + classToCheckInto.getInstructor().toUpperCase() + ", "
+                        + classToCheckInto.timeOfClass().toString() + ", " + classToCheckInto.getLocation().toString() + ".");
+            }
+            else{
+                System.out.println(memberName + " checked in " + classToCheckInto.getClassName() + classToCheckInto.getInstructor() +
+                        classToCheckInto.timeOfClass() + ", " + classToCheckInto.getLocation().name() + ".");
+            }
         }
         else{
             System.out.println(memberToCheckIn[0] + " is an invalid command!");
         }
     }
 
-    private void checkGuest(Member mem, FitnessClass fitClass){
-        if(mem instanceof Family || mem instanceof Premium){
-            if(!(mem.getLocation().toString().equalsIgnoreCase(fitClass.getLocation().toString()))){
-                System.out.println(mem.fullName() +" Guest checking in " + fitClass.getLocation() + " - guest location restriction.");
-            } else if(((Family) mem).getGuestPass() == 0){
-                System.out.println(mem.fullName() + " ran out of guest pass.");
-            } else {
-                ((Family) mem).guestIn();
-                fitClass.addGuest(mem);
-                System.out.println(mem.fullName() + " (guest) checked in " + fitClass.getClassName().toUpperCase() + " - " +
-                        fitClass.getInstructor().toUpperCase() + ", " + fitClass.timeOfClass().hourAndMinute() + ", " + fitClass.getLocation().name());
-                fitClass.printParticipantsAndGuests();
-            }
-        } else {
-            System.out.println("Standard membership - guest check-in is not allowed.");
+    private void checkGuest(String[] memberInfo, FitnessClass fitClass){
+        Member mem = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5], new Date(memberInfo[6])));
+        int checkGuestCondition = fitClass.checkGuest(mem);
+        if(checkGuestCondition == -6){
+            System.out.println(mem.fullName() +" Guest checking in " + fitClass.getLocation() + " - guest location restriction.");
+        }
+        else if(checkGuestCondition == -7){
+            System.out.println(mem.fullName() + " ran out of guest pass.");
+        }
+        else if(checkGuestCondition == -8){
+            System.out.println("Standard membership - guest check-in is not allowed");
+        }
+        else{
+            System.out.println(mem.fullName() + " (guest) checked in " + fitClass.getClassName().toUpperCase() + " - " +
+                    fitClass.getInstructor().toUpperCase() + ", " + fitClass.timeOfClass().hourAndMinute() + ", " + fitClass.getLocation().name());
+            fitClass.printParticipantsAndGuests();
         }
     }
 
@@ -285,46 +291,43 @@ public class GymManager {
      */
     private void dropClass(String[] memberToDrop) {
         if(memberToDrop[0].equals("D") || memberToDrop[0].equals("DG")) {
-            if(!checkCredentials(memberToDrop)) return;
-            Member memToDrop = memData.getFullDetails(new Member(memberToDrop[4], memberToDrop[5],
-                    new Date(memberToDrop[6])));
-            if (memToDrop == null) {
-                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " " + memberToDrop[6] + " is not in the database.");
-                return;
-            }
+            if(!checkClassCredentials(memberToDrop)) return;
             int fitClassIndex = getClassIndex(memberToDrop[2], memberToDrop[3], memberToDrop[1]);
             if(fitClassIndex < 0){
                 return;
             };
             FitnessClass classToDrop = classSchedule.returnList()[fitClassIndex];
             if(memberToDrop[0].equals("DG")){
-                dropGuest(memToDrop, classToDrop);
+                dropGuest(memberToDrop, classToDrop);
                 return;
             }
-            if (checkSchedulingConflict(classToDrop, memToDrop, false)) {
-                return;
+            int dropClassCondition = classToDrop.dropMem(memberToDrop, memData);
+            if (dropClassCondition == -8) {
+                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " " + memberToDrop[6] + " is not in the database.");
             }
-            if (classToDrop.dropMem(memToDrop))
-                System.out.println(memToDrop.fullName() + " done with the class.");
+            else if(dropClassCondition == -9){
+                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " did not check in.");
+            }
+            else{
+                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " done with the class.");
+            }
         }
         else{
             System.out.println(memberToDrop[0] + " is an invalid command!");
         }
     }
 
-    public void dropGuest(Member memToDrop, FitnessClass classToDrop){
-        ((Family)memToDrop).guestOut();
+    public void dropGuest(String[] memberInfo, FitnessClass classToDrop){
+        Member memToDrop = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5], new Date(memberInfo[6])));
         classToDrop.removeGuest(memToDrop);
         System.out.println(memToDrop.fullName() + " Guest done with the class.");
     }
 
-    private boolean checkCredentials(String[] memberCredentials){
-        if(!isValidLocation(memberCredentials[3])){
+    private boolean checkMemberCredentials(String location, String dob){
+        if(!isValidLocation(location)){
             return false;
         }
-        if(!isValidInstructor(memberCredentials[2])) return false;
-        if(!isValidClass(memberCredentials[1])) return false;
-        if (!isValidDateOfBirth(new Date(memberCredentials[6]))) return false;
+        if (!isValidDateOfBirth(new Date(dob))) return false;
         return true;
     }
 
@@ -352,9 +355,16 @@ public class GymManager {
             }
         }
         if(classExists < 0){
-            System.out.println(className + " by " + instructor + " does not exists at " + location);
+            System.out.println(className + " by " + instructor + " does not exist at " + location);
         }
         return classExists;
+    }
+
+    private boolean checkClassCredentials(String[] classInfo){
+        if(!isValidLocation(classInfo[3])) return false;
+        if(!isValidInstructor(classInfo[2])) return false;
+        if(!isValidClass(classInfo[1])) return false;
+        return true;
     }
 
     /**
@@ -364,7 +374,7 @@ public class GymManager {
      * @param location To be checked against the elements of the locations array
      * @return true if the location is in the array of locations, else false
      */
-    private boolean isValidLocation(String location) {
+    public boolean isValidLocation(String location) {
         for (Location locations : Location.values()) {
             if (location.toUpperCase().equals(locations.name())) {
                 return true;
@@ -374,14 +384,13 @@ public class GymManager {
         return false;
     }
 
-    private boolean isValidInstructor(String instructor){
+    public boolean isValidInstructor(String instructor){
         for(int i = 0; i < classSchedule.getNumOfClasses(); i++){
             String checkInstructor = classSchedule.returnList()[i].getInstructor();
-            if(instructor.equalsIgnoreCase(classSchedule.returnList()[i].getInstructor())){
+            if(instructor.equalsIgnoreCase(checkInstructor)){
                 return true;
             }
         }
-        System.out.println(instructor + " - instructor does not exist.");
         return false;
     }
 
@@ -439,51 +448,6 @@ public class GymManager {
             }
         }
         return true;
-    }
-
-    private boolean checkLocationRestriction(Member memToCheckIn, FitnessClass classToCheckInto){
-        if(memToCheckIn instanceof Family || memToCheckIn instanceof Premium){
-            return false;
-        }
-        else if(!memToCheckIn.getLocation().equals(classToCheckInto.getLocation())){
-            System.out.println(memToCheckIn.fullName() + " checking in " + classToCheckInto.getLocation().toString()
-                    + " - standard membership location restriction.");
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checks if the member has a scheduling conflict
-     * Checks if the member has already checked in if they are adding and if the member has not checked in if they are dropping
-     * If the member has checked into another class that overlaps with the class they are trying to
-     * check into, then they have a scheduling conflict
-     *
-     * @param fitClass     the class they are trying to check into
-     * @param memToCheckIn the member who is trying to check in
-     * @param checkingIn determines whether the member is checking into (true) or dropping (false) the class
-     * @return true if the member has a scheduling conflict, else false
-     */
-    private boolean checkSchedulingConflict(FitnessClass fitClass, Member memToCheckIn, boolean checkingIn) {
-        if(checkingIn) {
-            if (fitClass.findParticipant(memToCheckIn) >= 0) {
-                System.out.println(memToCheckIn.fullName() + " has already checked in " + fitClass.getClassName());
-                return true;
-            }
-            for (int i = 0; i < classSchedule.returnList().length; i++) {
-                if (classSchedule.getClass(i).timeOfClass().equals(fitClass.timeOfClass())
-                        && classSchedule.getClass(i).findParticipant(memToCheckIn) >= 0) {
-                    System.out.println("Time conflict - " + fitClass.getClassName() + ", " + fitClass.getInstructor() + ", "
-                            + fitClass.timeOfClass().toString() + ", " + fitClass.getLocation().toString() + ".");
-                    return true;
-                }
-            }
-        }
-        else if(fitClass.findParticipant(memToCheckIn) < 0){
-            System.out.println(memToCheckIn.fullName() + " did not check in.");
-            return true;
-        }
-        return false;
     }
 
     private void printMembers(String sortType){

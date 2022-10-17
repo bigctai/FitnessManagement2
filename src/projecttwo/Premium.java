@@ -22,9 +22,4 @@ public class Premium extends Family{
         return "(Premium) Guess-pass remaining";
     }
 
-    public int getGuestPass() { return guestPass; }
-
-    public void guestIn() { guestPass--; }
-
-    public void guestOut(){guestPass++;}
 }
