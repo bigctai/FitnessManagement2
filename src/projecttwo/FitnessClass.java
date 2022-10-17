@@ -1,6 +1,5 @@
 package projecttwo;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -52,23 +51,17 @@ public class FitnessClass {
         return instructor;
     }
 
+    public Member[] getParticipants(){return participants;}
+    public int getSize(){return size;}
+    public ArrayList<Member> getGuests(){return guests;}
+
     /**
      * Gets the time of the class
      *
      * @return timeOfClass as a Time object
      */
-    public Time timeOfClass() {
+    public Time getTimeOfClass() {
         return this.timeOfClass;
-    }
-
-    /**
-     * Prints out the class along with the participants in it
-     * Prints out the name of the class, instructor, and the time of the class, followed by each participant
-     */
-    public void printClass() {
-        System.out.println(className.toUpperCase() + " - " + instructor.toUpperCase() + ", " +
-                timeOfClass.hourAndMinute() + ", " + gymLocation);
-        printParticipants();
     }
 
     /**
@@ -137,7 +130,6 @@ public class FitnessClass {
             if(!(mem.getLocation().toString().equalsIgnoreCase(gymLocation.toString()))){
                 return -6;
             } else if(((Family) mem).getGuestPass() == 0){
-                System.out.println(mem.fullName() + " ran out of guest pass.");
                 return -7;
             } else {
                 ((Family) mem).guestIn();
@@ -170,7 +162,7 @@ public class FitnessClass {
      */
     private boolean checkSchedulingConflict(ClassSchedule classes, Member memToCheckIn) {
         for (int i = 0; i < classes.returnList().length; i++) {
-            if (classes.getClass(i).timeOfClass().equals(timeOfClass)
+            if (classes.getClass(i).getTimeOfClass().equals(timeOfClass)
                     && classes.getClass(i).findParticipant(memToCheckIn) >= 0) {
                     return true;
                 }
@@ -208,23 +200,5 @@ public class FitnessClass {
     public void removeGuest(Member guest){
         ((Family) guest).guestOut();
         guests.remove(guest);
-    }
-
-    public void printParticipantsAndGuests(){
-        printParticipants();
-        System.out.println("- Guests -");
-        for(Member guest : guests){
-            System.out.println("\t" + guest.toString());
-        }
-        System.out.println();
-    }
-
-    private void printParticipants(){
-        if (participants.length > 0) {
-            System.out.println("- Participants -");
-            for (int i = 0; i < size; i++) {
-                System.out.println("\t" + participants[i].toString());
-            }
-        }
     }
 }
