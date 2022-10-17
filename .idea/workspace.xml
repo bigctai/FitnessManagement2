@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated test cases">
-      <change afterPath="$PROJECT_DIR$/Classes.drawio.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665994608292</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Updated test cases">
+      <created>1665995117185</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1665995117185</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
