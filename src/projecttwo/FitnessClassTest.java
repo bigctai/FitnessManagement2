@@ -1,10 +1,31 @@
 package projecttwo;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import static org.junit.Assert.*;
 
 public class FitnessClassTest {
+    private MemberDatabase memData = new MemberDatabase();
+    private static final ClassSchedule classes = new ClassSchedule();
+    private static final FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER",
+            "PILATES", Location.BRIDGEWATER, new Member[]{});
+    @BeforeAll
+    public static void clearDatabaseThenAddMember(){
+        classes.addClass(testClass);
+    }
+
+    @Before
+    public void clearDatabase(){
+        memData = new MemberDatabase();
+        for(int i = 0; i < classes.getNumOfClasses(); i++){
+            if(classes.returnList()[i].getSize() > 0) {
+                classes.returnList()[i].getParticipants()[0] = null;
+                classes.returnList()[i].decrementSize();
+            }
+        }
+    }
 
     /**
      * Tests the checkInMember method to see if the dob is invalid.
@@ -12,15 +33,11 @@ public class FitnessClassTest {
      */
     @Test
     public void testInvalidDateCheckInMember() {
-        Date dob = new Date("1/32/2004");
-        Date expire = new Date("2/15/2023");
-        Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
+        Member mem = new Member ("John", "Doe", new Date("1/32/2000"), new Date("1/30/2023"), Location.BRIDGEWATER);
         memData.add(mem);
         FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
-        assertEquals(-10, testClass.checkInMember(mem,classes));
+        assertEquals(-10, testClass.checkInMember(mem, classes));
     }
 
     /**
@@ -29,17 +46,11 @@ public class FitnessClassTest {
      */
     @Test
     public void testNotInDatabaseCheckInMember() {
-        Date dob = new Date("1/20/2004");
-        Date expire = new Date("2/15/2023");
-        Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        Member mem1 = new Member("Jane", "Doe", dob);
-        MemberDatabase memData = new MemberDatabase();
-        memData.add(mem);
-        Member mem2 = memData.getFullDetails(mem1);
+        Member mem = new Member("Jane", "Doe", new Date("1/30/2000"));
+        mem = memData.getFullDetails(mem);
         FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
-        assertEquals(-1, testClass.checkInMember(mem2, classes));
+        assertEquals(-1, testClass.checkInMember(mem, classes));
     }
 
     /**
@@ -51,10 +62,7 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2020");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-2, testClass.checkInMember(mem,classes));
     }
@@ -68,11 +76,7 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.EDISON);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
         assertEquals(-3,testClass.checkInMember(mem,classes));
     }
 
@@ -85,13 +89,9 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        testClass.checkInMember(mem,classes);
-        assertEquals(-4,testClass.checkInMember(mem,classes));
+        testClass.checkInMember(mem, classes);
+        assertEquals(-4, testClass.checkInMember(mem, classes));
     }
 
     /**
@@ -101,12 +101,8 @@ public class FitnessClassTest {
     @Test
     public void testSchedulingConflictCheckInMember() {
         Member mem = new Member("John", "Doe", new Date("1/20/2004"), new Date("2/15/2023"), Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         FitnessClass testClass1 = new FitnessClass(Time.MORNING, "DENISE", "SPINNING", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
         classes.addClass(testClass1);
         testClass1.checkInMember(mem, classes);
         assertEquals(-5, testClass.checkInMember(mem, classes));
@@ -121,11 +117,7 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
         assertEquals(0, testClass.checkInMember(mem, classes));
     }
 
@@ -137,13 +129,9 @@ public class FitnessClassTest {
     public void testWrongGuestLocationCheckGuest() {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
-        Family mem1 = new Family("Jane", "Doe", dob, expire, Location.EDISON, 1);
-        MemberDatabase memData = new MemberDatabase();
-        memData.add(mem1);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        assertEquals(-6,testClass.checkGuest(mem1));
+        Family mem = new Family("Jane", "Doe", dob, expire, Location.EDISON, 1);
+        memData.add(mem);
+        assertEquals(-6, testClass.checkGuest(mem));
     }
 
     /**
@@ -154,13 +142,9 @@ public class FitnessClassTest {
     public void testNoMoreGuestCheckGuest() {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
-        Family mem1 = new Family("Jane", "Doe", dob, expire, Location.BRIDGEWATER, 0);
-        MemberDatabase memData = new MemberDatabase();
-        memData.add(mem1);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        assertEquals(-7,testClass.checkGuest(mem1));
+        Family mem = new Family("Jane", "Doe", dob, expire, Location.BRIDGEWATER, 0);
+        memData.add(mem);
+        assertEquals(-7, testClass.checkGuest(mem));
     }
 
     /**
@@ -172,12 +156,8 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        assertEquals(-8,testClass.checkGuest(mem));
+        assertEquals(-8, testClass.checkGuest(mem));
     }
 
     /**
@@ -188,13 +168,9 @@ public class FitnessClassTest {
     public void testCheckGuest() {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
-        Family mem1 = new Family("Jane", "Doe", dob, expire, Location.BRIDGEWATER, 1);
-        MemberDatabase memData = new MemberDatabase();
-        memData.add(mem1);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        assertEquals(0,testClass.checkGuest(mem1));
+        Family mem = new Family("Jane", "Doe", dob, expire, Location.BRIDGEWATER, 1);
+        memData.add(mem);
+        assertEquals(0, testClass.checkGuest(mem));
     }
 
     /**
@@ -207,13 +183,9 @@ public class FitnessClassTest {
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         Member mem1 = new Member("Jane", "Doe", dob);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member mem2 = memData.getFullDetails(mem1);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        assertEquals(-1, testClass.dropMem(mem2));
+        mem1 = memData.getFullDetails(mem1);
+        assertEquals(-1, testClass.dropMem(mem1));
     }
 
     /**
@@ -225,11 +197,7 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
         assertEquals(-9, testClass.dropMem(mem));
     }
 
@@ -242,12 +210,8 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
-        testClass.checkInMember(mem,classes);
+        testClass.checkInMember(mem, classes);
         assertEquals(0, testClass.dropMem(mem));
     }
 
@@ -260,11 +224,7 @@ public class FitnessClassTest {
         Date dob = new Date("1/20/2004");
         Date expire = new Date("2/15/2023");
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
-        MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
-        ClassSchedule classes = new ClassSchedule();
-        classes.addClass(testClass);
         assertEquals(-9, testClass.removeGuest(mem));
     }
 }

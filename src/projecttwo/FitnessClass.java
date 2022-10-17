@@ -53,12 +53,10 @@ public class FitnessClass {
     public String getClassName() {
         return this.className;
     }
-
     public Location getLocation(){ return gymLocation;}
     public String getInstructor(){
         return instructor;
     }
-
     public Member[] getParticipants(){return participants;}
     public int getSize(){return size;}
     public ArrayList<Member> getGuests(){return guests;}
@@ -196,9 +194,13 @@ public class FitnessClass {
             }
             participants[findParticipant(memToDrop)] = participants[size - 1];
             participants[size - 1] = null;
-            size--;
+            decrementSize();
             return 0;
         }
+    }
+
+    public void decrementSize(){
+        size--;
     }
 
     public int removeGuest(Member guest){
