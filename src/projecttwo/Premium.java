@@ -13,12 +13,8 @@ public class Premium extends Family{
         return fee;
     }
 
-    public String toString(){
-        return super.toString();
-    }
-
     @Override
-    protected String getClassName(){
+    public String getClassName(){
         return "(Premium) Guess-pass remaining";
     }
 

@@ -4,10 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class FitnessClassTest {
+public class PremiumTest {
 
     @Test
-    public void checkInMember() {
+    public void membershipFee() {
     }
-
 }

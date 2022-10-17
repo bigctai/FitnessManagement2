@@ -21,7 +21,7 @@ public class Family extends Member{
         return super.toString() + ", " + getClassName() + ": " + guestPass;
     }
 
-    protected String getClassName(){
+    public String getClassName(){
         return "(Family) guest-pass remaining";
     }
 

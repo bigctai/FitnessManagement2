@@ -206,7 +206,7 @@ public class GymManager {
         if(input.equals("S")) {
             System.out.println("-Fitness classes-");
             for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
-                printClass(classSchedule.getClass(i));
+                printClass(classSchedule.returnList()[i]);
             }
             System.out.println();
         }

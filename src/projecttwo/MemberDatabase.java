@@ -119,7 +119,7 @@ public class MemberDatabase {
             System.out.println(mlist[i].toString());
         }
         System.out.println("-end of list\n");
-    } //print the array contents as is
+    }
 
     public Member getFullDetails(Member mem) {
         if (find(mem) >= 0) return mlist[find(mem)];
@@ -138,7 +138,7 @@ public class MemberDatabase {
         }
         for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
-                Member tempSmallest = null;
+                Member tempSmallest;
                 if (mlist[i].getLocation().county().compareTo(mlist[j].getLocation().county()) > 0) {
                     tempSmallest = mlist[i];
                     mlist[i] = mlist[j];
@@ -156,7 +156,7 @@ public class MemberDatabase {
             System.out.println(mlist[i].toString());
         }
         System.out.println("-end of list-\n");
-    } //sort by county and then zipcode
+    }
 
     /**
      * Prints the member database sorted by their expiration dates
@@ -169,7 +169,7 @@ public class MemberDatabase {
         }
         for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
-                Member tempSmallest = null;
+                Member tempSmallest;
                 if (mlist[i].expirationDate().compareTo(mlist[j].expirationDate()) >= 0) {
                     tempSmallest = mlist[i];
                     mlist[i] = mlist[j];

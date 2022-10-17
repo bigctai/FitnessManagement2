@@ -162,8 +162,8 @@ public class FitnessClass {
      */
     private boolean checkSchedulingConflict(ClassSchedule classes, Member memToCheckIn) {
         for (int i = 0; i < classes.returnList().length; i++) {
-            if (classes.getClass(i).getTimeOfClass().equals(timeOfClass)
-                    && classes.getClass(i).findParticipant(memToCheckIn) >= 0) {
+            if (classes.returnList()[i].getTimeOfClass().equals(timeOfClass)
+                    && classes.returnList()[i].findParticipant(memToCheckIn) >= 0) {
                     return true;
                 }
             }
