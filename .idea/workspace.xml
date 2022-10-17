@@ -19,19 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated expiration dates">
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Added comments to all remaining methods in all classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Date.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/DateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Time.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666036135338</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Added comments to all remaining methods in all classes">
+      <created>1666045409993</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1666045409993</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -405,7 +404,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated loadMembers" />
     <MESSAGE value="Added method for reading from files and for creating a member to be added based on whether it was loaded in from file or from command line" />
     <MESSAGE value="Created constructors for Family and Premium classes, along with membershipFee method" />
     <MESSAGE value="Updated run method to call based on first character" />
@@ -430,24 +428,25 @@
     <MESSAGE value="Started PremiumTest" />
     <MESSAGE value="updated tests" />
     <MESSAGE value="Updated expiration dates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated expiration dates" />
+    <MESSAGE value="Added comments to all remaining methods in all classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments to all remaining methods in all classes" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1666040954392">
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1666045449121">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1666040954392" />
-    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1666040954390">
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1666045449121" />
+    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1666045449120">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1666040954390" />
-    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1666040954388">
+    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1666045449120" />
+    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1666045449120">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1666040954388" />
-    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1666040954390">
+    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1666045449120" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1666045449121">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1666040954390" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1666045449121" />
   </component>
 </project>
