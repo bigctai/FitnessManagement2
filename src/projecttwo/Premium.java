@@ -8,12 +8,20 @@ public class Premium extends Family{
         super(fname, lname, dob, expire, location, guestPass);
     }
     @Override
+    /**
+     * Gets the membership fee of a premium membership
+     *
+     * @return the membership fee as a double value
+     */
     public double membershipFee(){
         double fee = PER_YEAR - ONE_MONTH;
         return fee;
     }
 
     @Override
+    /**
+     * @return the String for number of premium guest passes remaining
+     */
     public String getClassName(){
         return "(Premium) Guess-pass remaining";
     }

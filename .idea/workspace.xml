@@ -19,10 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Created JUnit for FitnessClass">
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Added comments for DateTest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/DateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665989502839</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Added comments for DateTest">
+      <created>1665991152015</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1665991152015</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -368,12 +377,17 @@
     <MESSAGE value="Updated where methods are called" />
     <MESSAGE value="Updated print methods" />
     <MESSAGE value="Created JUnit for FitnessClass" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created JUnit for FitnessClass" />
+    <MESSAGE value="Added comments for DateTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments for DateTest" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="63" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1665989598738">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="223" y="63" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.816@0.0.1536.816" timestamp="1665989598738" />
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1665991444471">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1665991444471" />
   </component>
 </project>

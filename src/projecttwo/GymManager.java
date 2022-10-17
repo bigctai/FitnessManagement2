@@ -13,7 +13,6 @@ import java.util.zip.Adler32;
  */
 public class GymManager {
     private MemberDatabase memData = new MemberDatabase();
-
     private ClassSchedule classSchedule = new ClassSchedule();
     private Scanner scanUserInput = new Scanner(System.in);
     private String input;
@@ -79,7 +78,7 @@ public class GymManager {
     }
 
     /**
-     *
+     * Loads the list of members
      */
 
     private void loadMembers() {

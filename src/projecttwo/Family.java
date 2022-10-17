@@ -11,6 +11,11 @@ public class Family extends Member{
     }
 
     @Override
+    /**
+     * Gets the membership fee of a standard membership
+     *
+     * @return the membership fee as a double value
+     */
     public double membershipFee(){
         double fee = ONE_TIME + (3 * FAM_PER_MONTH);
         return fee;
@@ -21,13 +26,27 @@ public class Family extends Member{
         return super.toString() + ", " + getClassName() + ": " + guestPass;
     }
 
+    /**
+     * @return the String for number of family guest passes remaining
+     */
     public String getClassName(){
         return "(Family) guest-pass remaining";
     }
 
+    /**
+     * Gets the number of guest passes that a member has
+     *
+     * @return the number of guest passes as an int value
+     */
     public int getGuestPass() { return guestPass; }
 
+    /**
+     * Checks a guest in by subtracting 1 from the number of guest passes remaining
+     */
     public void guestIn() { guestPass--; }
 
+    /**
+     * Checks a guest out by adding 1 to the number of guest passes remaining
+     */
     public void guestOut(){guestPass++;}
 }
