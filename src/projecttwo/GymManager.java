@@ -69,6 +69,10 @@ public class GymManager {
         System.out.println("Gym Manager terminated.");
     }
 
+    /**
+     * Loads the list of members or list of classes depending on the command in the argument
+     * @param loadType the string command that determines whether to load the list of members or class schedule
+     */
     private void load(String loadType){
         if(loadType.equals("LM")){
             loadMembers();
@@ -79,9 +83,9 @@ public class GymManager {
     }
 
     /**
-     * Loads the list of members
+     * Loads the list of members from the file specified in the path
+     * Will print all of the members in the list from beginning to end
      */
-
     private void loadMembers() {
         String filePath = new File("").getAbsolutePath();
         filePath += "/memberList";
@@ -102,6 +106,10 @@ public class GymManager {
         }
     }
 
+    /**
+     * Loads the list of classes from the file specified in the path
+     * Will print all of the classes in the list from beginning to end
+     */
     private void loadSchedule(){
         String filePath = new File("").getAbsolutePath();
         filePath += "/classSchedule";
@@ -282,6 +290,14 @@ public class GymManager {
         }
     }
 
+    /**
+     * Performs checks to ensure that the guest of a certain member is allowed to check in.
+     * Checks if the member is eligible to check in a guest, has guest passes remaining, and
+     * is checking in a guest at the original membership location.
+     *
+     * @param memberInfo contains the member data as elements of a string array
+     * @param fitClass the fitness class that the member is trying to check the guest into
+     */
     private void checkGuest(String[] memberInfo, FitnessClass fitClass){
         Member mem = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5], new Date(memberInfo[6])));
         int checkGuestCondition = fitClass.checkGuest(mem);
@@ -341,6 +357,13 @@ public class GymManager {
         }
     }
 
+    /**
+     * Performs checks to make sure that the members guest can drop or end their class session.
+     * Checks if the member checked a guest into the class before ending the class session for the guest.
+     *
+     * @param memToDrop the member whose guest is trying to drop the class
+     * @param classToDrop the fitness class that the guest is trying to drop
+     */
     public void dropGuest(Member memToDrop, FitnessClass classToDrop){
         int dropGuestCondition = classToDrop.removeGuest(memToDrop);
         if(dropGuestCondition == NOT_CHECKED_IN){
@@ -381,6 +404,15 @@ public class GymManager {
         return classExists;
     }
 
+    /**
+     * Performs checks to make sure that the class is valid
+     * Checks the location of the class to see if it exists, and then
+     * checks the list of classes at the location to check if the class exists.
+     * Calls other private methods to check if instructor exists
+     *
+     * @param classInfo fitness class information as elements of a string array
+     * @return true if class credentials match the database and false otherwise
+     */
     private boolean checkClassCredentials(String[] classInfo){
         boolean locationExists = false;
         for (Location locations : Location.values()) {
@@ -415,6 +447,13 @@ public class GymManager {
         return false;
     }
 
+    /**
+     * Checks if the instructor exists
+     * Iterates through the class schedule array and finds an instructor that equals the argument
+     *
+     * @param instructor name of the instructor that is to be verified
+     * @return true if the instructor exists in the class schedule and false otherwise
+     */
     public boolean isValidInstructor(String instructor){
         for(int i = 0; i < classSchedule.getNumOfClasses(); i++){
             String checkInstructor = classSchedule.returnList()[i].getInstructor();
@@ -426,6 +465,12 @@ public class GymManager {
         return false;
     }
 
+    /**
+     * Checks if the class exists
+     * Iterates through the class schedule array to and finds a class that equals the argument
+     * @param className name of the class to be verified
+     * @return true if the class exists in the class schedule and false otherwise
+     */
     private boolean isValidClass(String className) {
         for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
             if(className.equalsIgnoreCase(classSchedule.returnList()[i].getClassName())){
@@ -482,6 +527,12 @@ public class GymManager {
         return true;
     }
 
+    /**
+     * Prints all of the attributes of a member depending on the command inputted as the argument
+     * Calls outside methods to print the correct statement
+     *
+     * @param sortType string command used to print certain attributes of a member
+     */
     private void printMembers(String sortType){
         switch(sortType){
             case "P" :

@@ -6,16 +6,28 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static org.junit.Assert.*;
 
+/**
+ * A FitnessCLass test class that provides the JUnit testing for the FitnessClass class.
+ * Provides methods for every test case applicable to the checkInMember, dropMem, and checkGuest methods.
+ * @author Chris Tai, Shreyank Yelagoila
+ */
 public class FitnessClassTest {
     private MemberDatabase memData = new MemberDatabase();
     private static final ClassSchedule classes = new ClassSchedule();
     private static final FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER",
             "PILATES", Location.BRIDGEWATER, new Member[]{});
+
+    /**
+     * Clears the database and then adds a class
+     */
     @BeforeAll
     public static void clearDatabaseThenAddMember(){
         classes.addClass(testClass);
     }
 
+    /**
+     * Gets rid of all the members in the database
+     */
     @Before
     public void clearDatabase(){
         memData = new MemberDatabase();
