@@ -131,7 +131,7 @@ public class Member implements Comparable<Member> {
     /**
      * Gets the membership fee of a standard membership
      *
-     * @return the location variable as location
+     * @return the membership fee as a double value
      */
     public double membershipFee(){
         double fee = ONE_TIME + (3*PER_MONTH);

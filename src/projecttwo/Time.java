@@ -23,6 +23,11 @@ public enum Time {
         this.minute = minute;
     }
 
+    /**
+     * Gets the time in the format hh:mm
+     *
+     * @return the time as a string
+     */
     public String hourAndMinute(){
         DecimalFormat formatTime = new DecimalFormat("00");
         return this.hour + ":" + formatTime.format(this.minute);

@@ -4,6 +4,11 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * A Date test class that provides the JUnit testing for the Date class.
+ * Provides methods for every test case applicable to the isValid method.
+ * @author Chris Tai, Shreyank Yelagoila
+ */
 public class DateTest {
 
     /**

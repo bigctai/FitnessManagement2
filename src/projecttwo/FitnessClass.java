@@ -53,12 +53,42 @@ public class FitnessClass {
     public String getClassName() {
         return this.className;
     }
+
+    /**
+     * Gets the location of the fitness class
+     *
+     * @return the location as a location variable
+     */
     public Location getLocation(){ return gymLocation;}
+
+    /**
+     * Gets the instructor of the fitness class
+     *
+     * @return the instructor as a String
+     */
     public String getInstructor(){
         return instructor;
     }
+
+    /**
+     * Gets the list of participants in the fitness class
+     *
+     * @return the list of participants as a Member array
+     */
     public Member[] getParticipants(){return participants;}
+
+    /**
+     * Gets the size of the fitness class
+     *
+     * @return the size of the class as an integer
+     */
     public int getSize(){return size;}
+
+    /**
+     * Gets the list of guests in the fitness class
+     *
+     * @return the list of guests as a Member arraylist
+     */
     public ArrayList<Member> getGuests(){return guests;}
 
     /**
@@ -129,6 +159,13 @@ public class FitnessClass {
         size++;
         return 0;
     }
+
+    /**
+     * Checks a guest into the fitness class and adds the member to guests arraylist
+     *
+     * @param mem member who is checking in a guest
+     * @return true if the member is able to check in their guest
+     */
     public int checkGuest(Member mem){
         if(mem instanceof Family || mem instanceof Premium){
             if(!(mem.getLocation().toString().equalsIgnoreCase(gymLocation.toString()))){
@@ -145,6 +182,12 @@ public class FitnessClass {
         }
     }
 
+    /**
+     * Checks if the member is allowed to check into the fitness class at this location
+     *
+     * @param memToCheckIn member that is checking into this location
+     * @return true if the member is restricted from checking into this location and false otherwise
+     */
     private boolean checkLocationRestriction(Member memToCheckIn){
         if(memToCheckIn instanceof Family || memToCheckIn instanceof Premium){
             return false;
@@ -202,10 +245,19 @@ public class FitnessClass {
         }
     }
 
+    /**
+     * Reduces the size variable by 1
+     */
     public void decrementSize(){
         size--;
     }
 
+    /**
+     * Removes a guest from this fitness class
+     *
+     * @param guest the member who is trying to remove their guest from this class
+     * @return true if the guest is successfully removed from the class
+     */
     public int removeGuest(Member guest){
         if(!guests.contains(guest)){
             return NOT_CHECKED_IN;
