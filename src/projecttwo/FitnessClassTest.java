@@ -230,7 +230,7 @@ public class FitnessClassTest {
         FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
-        assertEquals(-9,testClass.dropMem(mem));
+        assertEquals(-9, testClass.dropMem(mem));
     }
 
     /**
@@ -248,9 +248,23 @@ public class FitnessClassTest {
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         testClass.checkInMember(mem,classes);
-        assertEquals(0,testClass.dropMem(mem));
+        assertEquals(0, testClass.dropMem(mem));
     }
 
-
-
+    /**
+     * Tests the removeGuest method to see if the guest has not checked into the class.
+     * Will return -9 if the guest has not checked into the class.
+     */
+    @Test
+    public void testNotCheckedInDropGuest(){
+        Date dob = new Date("1/20/2004");
+        Date expire = new Date("2/15/2023");
+        Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
+        MemberDatabase memData = new MemberDatabase();
+        memData.add(mem);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
+        ClassSchedule classes = new ClassSchedule();
+        classes.addClass(testClass);
+        assertEquals(-9, testClass.removeGuest(mem));
+    }
 }

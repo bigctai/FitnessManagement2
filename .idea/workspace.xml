@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated test cases">
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" afterDir="false" />
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Started PremiumTest">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665995117185</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Started PremiumTest">
+      <created>1665995691605</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1665995691605</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -355,6 +365,7 @@
     <MESSAGE value="Updated print methods" />
     <MESSAGE value="Fixed bugs" />
     <MESSAGE value="Updated test cases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated test cases" />
+    <MESSAGE value="Started PremiumTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started PremiumTest" />
   </component>
 </project>
