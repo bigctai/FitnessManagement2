@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated print methods">
-      <change afterPath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" afterDir="false" />
+    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Updated exception catch block">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_15_22__6_38_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_15_22__6_38_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/ClassSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Family.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Family.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/projecttwo/GymManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/GymManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/MemberDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/MemberTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Premium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Premium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,18 +59,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
-  }
-}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -317,6 +320,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created ClassSchedule" />

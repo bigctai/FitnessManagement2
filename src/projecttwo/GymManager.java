@@ -3,6 +3,7 @@ package projecttwo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.zip.Adler32;
 
 /**
  * Processes the inputs and calls other classes based on the input
@@ -16,9 +17,16 @@ public class GymManager {
     private ClassSchedule classSchedule = new ClassSchedule();
     private Scanner scanUserInput = new Scanner(System.in);
     private String input;
-    private static final int NOT_FOUND = -1;
-    private static final int ALREADY_CHECKED_IN = -2;
-    private static final int NOT_CHECKED_IN = -3;
+    private final int NOT_FOUND = -1;
+    private final int EXPIRED = -2;
+    private final int WRONG_LOCATION = -3;
+    private final int DUPLICATE = -4;
+    private final int CONFLICT = -5;
+    private final int WRONG_GUEST_LOCATION = -6;
+    private final int NO_MORE_GUEST = -7;
+    private final int STANDARD = -8;
+    private static final int NOT_CHECKED_IN = -9;
+    private final int INVALID_DATE = -10;
     private static final int ADULT = 18;
 
     /**
@@ -232,25 +240,27 @@ public class GymManager {
                 checkGuest(memberToCheckIn, classToCheckInto);
                 return;
             }
-            int checkConditions = classToCheckInto.checkInMember(memberToCheckIn, classSchedule, memData);
+            Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
+                    new Date(memberToCheckIn[6])));
+            int checkConditions = classToCheckInto.checkInMember(memToCheckIn, classSchedule);
             String memberName = memberToCheckIn[4] + " " + memberToCheckIn[5];
-            if(checkConditions == -10){
+            if(checkConditions == INVALID_DATE){
                 System.out.println("DOB " + memberToCheckIn[6] + ": invalid calendar date!");
             }
-            if(checkConditions == -1){
+            if(checkConditions == NOT_FOUND){
                 System.out.println(memberName + " " + memberToCheckIn[6] + " is not in the database.");
             }
-            else if(checkConditions == -2){
+            else if(checkConditions == EXPIRED){
                 System.out.println(memberName + " " + memberToCheckIn[6] + " membership expired.");
             }
-            else if(checkConditions == -3){
+            else if(checkConditions == WRONG_LOCATION){
                 System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " checking in " +
                         classToCheckInto.getLocation().toString() + " - standard membership location restriction.");
             }
-            else if(checkConditions == -4){
+            else if(checkConditions == DUPLICATE){
                 System.out.println(memberName + " already checked in.");
             }
-            else if(checkConditions == -5){
+            else if(checkConditions == CONFLICT){
                 System.out.println("Time conflict - " + classToCheckInto.getClassName().toUpperCase() + " - " + classToCheckInto.getInstructor().toUpperCase() + ", "
                         + classToCheckInto.getTimeOfClass().toString() + ", " + classToCheckInto.getLocation().toString() + ".");
             }
@@ -268,13 +278,13 @@ public class GymManager {
     private void checkGuest(String[] memberInfo, FitnessClass fitClass){
         Member mem = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5], new Date(memberInfo[6])));
         int checkGuestCondition = fitClass.checkGuest(mem);
-        if(checkGuestCondition == -6){
+        if(checkGuestCondition == WRONG_GUEST_LOCATION){
             System.out.println(mem.fullName() +" Guest checking in " + fitClass.getLocation() + " - guest location restriction.");
         }
-        else if(checkGuestCondition == -7){
+        else if(checkGuestCondition == NO_MORE_GUEST){
             System.out.println(mem.fullName() + " ran out of guest pass.");
         }
-        else if(checkGuestCondition == -8){
+        else if(checkGuestCondition == STANDARD){
             System.out.println("Standard membership - guest check-in is not allowed");
         }
         else{
@@ -303,11 +313,13 @@ public class GymManager {
                 dropGuest(memberToDrop, classToDrop);
                 return;
             }
-            int dropClassCondition = classToDrop.dropMem(memberToDrop, memData);
-            if (dropClassCondition == -8) {
+            Member memToDrop = memData.getFullDetails(new Member(memberToDrop[4], memberToDrop[5],
+                    new Date(memberToDrop[6])));
+            int dropClassCondition = classToDrop.dropMem(memToDrop);
+            if (dropClassCondition == NOT_FOUND) {
                 System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " " + memberToDrop[6] + " is not in the database.");
             }
-            else if(dropClassCondition == -9){
+            else if(dropClassCondition == NOT_CHECKED_IN){
                 System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " did not check in.");
             }
             else{
@@ -438,7 +450,7 @@ public class GymManager {
         if (currentDate.getYear() - checkDateOfBirth.getYear() < ADULT) {
             System.out.println("DOB " + dob + ": must be 18 or older to join!");
             return false;
-        } else if (currentDate.getYear() - checkDateOfBirth.getYear() == 18) {
+        } else if (currentDate.getYear() - checkDateOfBirth.getYear() == ADULT) {
             if (currentDate.getMonth() < checkDateOfBirth.getMonth()) {
                 System.out.println("DOB " + dob + ": must be 18 or older to join!");
                 return false;
