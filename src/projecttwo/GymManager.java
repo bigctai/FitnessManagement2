@@ -83,7 +83,9 @@ public class GymManager {
      */
 
     private void loadMembers() {
-        File memberList = new File("/Users/christai/IdeaProjects/Project2/src/memberList");
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/memberList";
+        File memberList = new File(filePath);
         try {
             Scanner memberScanner = new Scanner(memberList);
             System.out.println("-list of members loaded-");
@@ -96,12 +98,14 @@ public class GymManager {
             System.out.println("-end of list-");
         }
         catch (FileNotFoundException exception) {
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
     private void loadSchedule(){
-        File scheduleList = new File("/Users/christai/IdeaProjects/Project2/src/classSchedule");
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/classSchedule";
+        File scheduleList = new File(filePath);
         try{
             Scanner classScanner = new Scanner(scheduleList);
             System.out.println("-list of classes loaded-");
@@ -110,13 +114,13 @@ public class GymManager {
                 FitnessClass fitClass = new FitnessClass(Time.valueOf(classInputData[2].toUpperCase()),
                         classInputData[1], classInputData[0], Location.valueOf(classInputData[3].toUpperCase()), new Member[0]);
                 printClass(fitClass);
-                System.out.println();
                 classSchedule.addClass(fitClass);
             }
             System.out.println("-end of class list-");
+            System.out.println();
         }
         catch(FileNotFoundException exception){
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
@@ -388,7 +392,7 @@ public class GymManager {
      * @param location To be checked against the elements of the locations array
      * @return true if the location is in the array of locations, else false
      */
-    public boolean isValidLocation(String location) {
+    private boolean isValidLocation(String location) {
         for (Location locations : Location.values()) {
             if (location.toUpperCase().equals(locations.name())) {
                 return true;

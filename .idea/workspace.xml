@@ -19,10 +19,6 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Created JUnit for FitnessClass">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/DateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/Member.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,8 +53,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/projecttwo" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -271,12 +268,6 @@
       <option name="project" value="LOCAL" />
       <updated>1665971343341</updated>
     </task>
-    <task id="LOCAL-00026" summary="Created JUnit for FitnessClass">
-      <created>1665989502839</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1665989502839</updated>
     </task>
     <option name="localTasksCounter" value="27" />
     <servers />
@@ -367,13 +358,5 @@
     <MESSAGE value="Updated exception catch block" />
     <MESSAGE value="Updated where methods are called" />
     <MESSAGE value="Updated print methods" />
-    <MESSAGE value="Created JUnit for FitnessClass" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created JUnit for FitnessClass" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="223" y="63" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1665989598738">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state x="223" y="63" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.816@0.0.1536.816" timestamp="1665989598738" />
   </component>
 </project>
