@@ -110,12 +110,11 @@ public class FitnessClass {
         if (size == participants.length) {
             grow();
         }
-        if(!memToCheckIn.dob().isValid()){
-            return INVALID_DATE;
-        }
-
         if (memToCheckIn == null) {
             return NOT_FOUND;
+        }
+        if(!memToCheckIn.dob().isValid()){
+            return INVALID_DATE;
         }
         if (memToCheckIn.expirationDate().compareTo(new Date()) < 0) {
             return EXPIRED;
@@ -169,7 +168,7 @@ public class FitnessClass {
      * @return true if the member has a scheduling conflict, else false
      */
     private boolean checkSchedulingConflict(ClassSchedule classes, Member memToCheckIn) {
-        for (int i = 0; i < classes.returnList().length; i++) {
+        for (int i = 0; i < classes.getNumOfClasses(); i++) {
             if (classes.returnList()[i].getTimeOfClass().equals(timeOfClass)
                     && classes.returnList()[i].findParticipant(memToCheckIn) >= 0) {
                     return true;

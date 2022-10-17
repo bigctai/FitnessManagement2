@@ -3,7 +3,6 @@ package projecttwo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.zip.Adler32;
 
 /**
  * Processes the inputs and calls other classes based on the input
