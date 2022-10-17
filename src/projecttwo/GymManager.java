@@ -262,7 +262,7 @@ public class GymManager {
             if(checkConditions == INVALID_DATE){
                 System.out.println("DOB " + memToCheckIn.dob().dateString() + ": invalid calendar date!");
             }
-            if(checkConditions == NOT_FOUND){
+            else if(checkConditions == NOT_FOUND){
                 System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " " + memberToCheckIn[6] + " is not in the database.");
             }
             else if(checkConditions == EXPIRED){
@@ -277,7 +277,7 @@ public class GymManager {
             }
             else if(checkConditions == CONFLICT){
                 System.out.println("Time conflict - " + classToCheckInto.getClassName().toUpperCase() + " - " + classToCheckInto.getInstructor().toUpperCase() + ", "
-                        + classToCheckInto.getTimeOfClass().toString() + ", " + classToCheckInto.getLocation().toString() + ".");
+                        + classToCheckInto.getTimeOfClass().hourAndMinute() + ", " + classToCheckInto.getLocation().toString() + ".");
             }
             else{
                 System.out.print(memToCheckIn.fullName() + " checked in ");

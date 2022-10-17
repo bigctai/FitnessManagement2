@@ -118,7 +118,7 @@ public class MemberDatabase {
         for (int i = 0; i < size; i++) {
             System.out.println(mlist[i].toString());
         }
-        System.out.println("-end of list\n");
+        System.out.println("-end of list-\n");
     }
 
     /**
