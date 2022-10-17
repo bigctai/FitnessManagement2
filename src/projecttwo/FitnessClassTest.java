@@ -17,8 +17,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {mem};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-10, testClass.checkInMember(mem,classes));
@@ -36,9 +35,8 @@ public class FitnessClassTest {
         Member mem1 = new Member("Jane", "Doe", dob);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {};
         Member mem2 = memData.getFullDetails(mem1);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-1, testClass.checkInMember(mem2, classes));
@@ -55,11 +53,10 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {mem};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
-        assertEquals(-2,testClass.checkInMember(mem,classes));
+        assertEquals(-2, testClass.checkInMember(mem,classes));
     }
 
     /**
@@ -73,8 +70,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.EDISON);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {mem};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-3,testClass.checkInMember(mem,classes));
@@ -91,8 +87,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {mem};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         testClass.checkInMember(mem,classes);
@@ -128,8 +123,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(0, testClass.checkInMember(mem, classes));
@@ -146,8 +140,7 @@ public class FitnessClassTest {
         Family mem1 = new Family("Jane", "Doe", dob, expire, Location.EDISON, 1);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem1);
-        Member[] participants = {mem1};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-6,testClass.checkGuest(mem1));
@@ -164,8 +157,7 @@ public class FitnessClassTest {
         Family mem1 = new Family("Jane", "Doe", dob, expire, Location.BRIDGEWATER, 0);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem1);
-        Member[] participants = {mem1};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-7,testClass.checkGuest(mem1));
@@ -182,8 +174,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {mem};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-8,testClass.checkGuest(mem));
@@ -200,8 +191,7 @@ public class FitnessClassTest {
         Family mem1 = new Family("Jane", "Doe", dob, expire, Location.BRIDGEWATER, 1);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem1);
-        Member[] participants = {mem1};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(0,testClass.checkGuest(mem1));
@@ -219,9 +209,8 @@ public class FitnessClassTest {
         Member mem1 = new Member("Jane", "Doe", dob);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {};
         Member mem2 = memData.getFullDetails(mem1);
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-1, testClass.dropMem(mem2));
@@ -238,8 +227,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         assertEquals(-9,testClass.dropMem(mem));
@@ -256,8 +244,7 @@ public class FitnessClassTest {
         Member mem = new Member("John", "Doe", dob, expire, Location.BRIDGEWATER);
         MemberDatabase memData = new MemberDatabase();
         memData.add(mem);
-        Member[] participants = {mem};
-        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, participants);
+        FitnessClass testClass = new FitnessClass(Time.MORNING, "JENNIFER", "PILATES", Location.BRIDGEWATER, new Member[]{});
         ClassSchedule classes = new ClassSchedule();
         classes.addClass(testClass);
         testClass.checkInMember(mem,classes);
