@@ -3,7 +3,6 @@ package projecttwo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.zip.Adler32;
 
 /**
  * Processes the inputs and calls other classes based on the input
@@ -27,6 +26,8 @@ public class GymManager {
     private static final int NOT_CHECKED_IN = -9;
     private final int INVALID_DATE = -10;
     private static final int ADULT = 18;
+    private final int STANDARD_AND_FAMILY_EXPIRATION = 3;
+    private final int PREMIUM_EXPIRATION = 12;
 
     /**
      * Calls methods based on user input
@@ -82,40 +83,44 @@ public class GymManager {
      */
 
     private void loadMembers() {
-        File memberList = new File("/Users/christai/IdeaProjects/Project2/src/memberList");
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/memberList";
+        File memberList = new File(filePath);
         try {
             Scanner memberScanner = new Scanner(memberList);
-            System.out.println("-list of members loaded-");
+            System.out.println("\n-list of members loaded-");
             while (memberScanner.hasNextLine()) {
                 String[] memberInputData = memberScanner.nextLine().replaceAll("  ", " ").split(" ");
                 Member member = createMember(memberInputData, true);
                 memData.add(member);
                 System.out.println(member.toString());
             }
-            System.out.println("-end of list-");
+            System.out.println("-end of list-\n");
         }
         catch (FileNotFoundException exception) {
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
     private void loadSchedule(){
-        File scheduleList = new File("/Users/christai/IdeaProjects/Project2/src/classSchedule");
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/classSchedule";
+        File scheduleList = new File(filePath);
         try{
             Scanner classScanner = new Scanner(scheduleList);
-            System.out.println("-list of classes loaded-");
+            System.out.println("\n-Fitness Classes loaded-");
             while(classScanner.hasNextLine()){
                 String [] classInputData = classScanner.nextLine().split(" ");
                 FitnessClass fitClass = new FitnessClass(Time.valueOf(classInputData[2].toUpperCase()),
                         classInputData[1], classInputData[0], Location.valueOf(classInputData[3].toUpperCase()), new Member[0]);
                 printClass(fitClass);
-                System.out.println();
                 classSchedule.addClass(fitClass);
             }
-            System.out.println("-end of class list-");
+            System.out.println("-end of class list-\n");
+            System.out.println();
         }
         catch(FileNotFoundException exception){
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
@@ -131,7 +136,7 @@ public class GymManager {
             System.out.println(memberToAdd[0] + " is an invalid command!");
             return;
         }
-        if(!checkMemberCredentials(memberToAdd[4], memberToAdd[3])){
+        if(!isValidLocation(memberToAdd[4])){
             return;
         }
         Member memToAdd = createMember(memberToAdd, false);
@@ -141,11 +146,8 @@ public class GymManager {
                 return;
             }
         }
-        if (!isOldEnough(memToAdd.dob())) {
-            return;
-        }
-        if (memData.add(memToAdd))
-            System.out.println(memToAdd.fullName() + " added.");
+        if (!isOldEnough(memToAdd.dob()) || !isValidDateOfBirth(memToAdd.dob())) return;
+        if (memData.add(memToAdd)) System.out.println(memToAdd.fullName() + " added.");
     }
 
     /**
@@ -167,12 +169,15 @@ public class GymManager {
             dob = new Date(memberToAdd[3]);
             expirationDate = new Date();
             if(memberToAdd[0].equals("AF")){
-                expirationDate.setExpire();
+                expirationDate.setExpire(STANDARD_AND_FAMILY_EXPIRATION);
                 return new Family (firstName, lastName, dob, expirationDate, location, 1);
             }
             else if(memberToAdd[0].equals("AP")){
-                expirationDate.setExpire();
+                expirationDate.setExpire(PREMIUM_EXPIRATION);
                 return new Premium (firstName, lastName, dob, expirationDate, location, 3);
+            }
+            else{
+                expirationDate.setExpire(STANDARD_AND_FAMILY_EXPIRATION);
             }
         }
         else{
@@ -181,7 +186,6 @@ public class GymManager {
             dob = new Date(memberToAdd[2]);
             expirationDate = new Date(memberToAdd[3]);
         }
-        expirationDate.setExpire();
         return new Member(firstName, lastName, dob, expirationDate, location);
     }
 
@@ -211,11 +215,16 @@ public class GymManager {
      */
     private void printClasses(String input) {
         if(input.equals("S")) {
-            System.out.println("-Fitness classes-");
-            for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
-                printClass(classSchedule.returnList()[i]);
+            if(classSchedule.getNumOfClasses() == 0){
+                System.out.println("Fitness class schedule is empty");
             }
-            System.out.println();
+            else {
+                System.out.println("-Fitness classes-");
+                for (int i = 0; i < classSchedule.getNumOfClasses(); i++) {
+                    printClass(classSchedule.returnList()[i]);
+                }
+                System.out.println("-end of class list.\n");
+            }
         }
         else{
             System.out.println(input + " is an invalid command!");
@@ -242,29 +251,28 @@ public class GymManager {
             Member memToCheckIn = memData.getFullDetails(new Member(memberToCheckIn[4], memberToCheckIn[5],
                     new Date(memberToCheckIn[6])));
             int checkConditions = classToCheckInto.checkInMember(memToCheckIn, classSchedule);
-            String memberName = memberToCheckIn[4] + " " + memberToCheckIn[5];
             if(checkConditions == INVALID_DATE){
-                System.out.println("DOB " + memberToCheckIn[6] + ": invalid calendar date!");
+                System.out.println("DOB " + memToCheckIn.dob().dateString() + ": invalid calendar date!");
             }
             if(checkConditions == NOT_FOUND){
-                System.out.println(memberName + " " + memberToCheckIn[6] + " is not in the database.");
+                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " " + memberToCheckIn[6] + " is not in the database.");
             }
             else if(checkConditions == EXPIRED){
-                System.out.println(memberName + " " + memberToCheckIn[6] + " membership expired.");
+                System.out.println(memToCheckIn.fullName() + " " + memberToCheckIn[6] + " membership expired.");
             }
             else if(checkConditions == WRONG_LOCATION){
-                System.out.println(memberToCheckIn[4] + " " + memberToCheckIn[5] + " checking in " +
+                System.out.println(memToCheckIn.fullName() + " checking in " +
                         classToCheckInto.getLocation().toString() + " - standard membership location restriction.");
             }
             else if(checkConditions == DUPLICATE){
-                System.out.println(memberName + " already checked in.");
+                System.out.println(memToCheckIn.fullName() + " already checked in.");
             }
             else if(checkConditions == CONFLICT){
                 System.out.println("Time conflict - " + classToCheckInto.getClassName().toUpperCase() + " - " + classToCheckInto.getInstructor().toUpperCase() + ", "
                         + classToCheckInto.getTimeOfClass().toString() + ", " + classToCheckInto.getLocation().toString() + ".");
             }
             else{
-                System.out.print(memberName + " checked in ");
+                System.out.print(memToCheckIn.fullName() + " checked in ");
                 printClass(classToCheckInto);
                 System.out.println();
             }
@@ -308,21 +316,24 @@ public class GymManager {
                 return;
             }
             FitnessClass classToDrop = classSchedule.returnList()[fitClassIndex];
-            if(memberToDrop[0].equals("DG")){
-                dropGuest(memberToDrop, classToDrop);
-                return;
-            }
             Member memToDrop = memData.getFullDetails(new Member(memberToDrop[4], memberToDrop[5],
                     new Date(memberToDrop[6])));
+            if(memberToDrop[0].equals("DG")){
+                dropGuest(memToDrop, classToDrop);
+                return;
+            }
             int dropClassCondition = classToDrop.dropMem(memToDrop);
-            if (dropClassCondition == NOT_FOUND) {
+            if(dropClassCondition == INVALID_DATE){
+                System.out.println("DOB " + memToDrop.dob().dateString() + ": invalid calendar date!");
+            }
+            else if (dropClassCondition == NOT_FOUND) {
                 System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " " + memberToDrop[6] + " is not in the database.");
             }
             else if(dropClassCondition == NOT_CHECKED_IN){
-                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " did not check in.");
+                System.out.println(memToDrop.fullName() + " did not check in.");
             }
             else{
-                System.out.println(memberToDrop[4] + " " + memberToDrop[5] + " done with the class.");
+                System.out.println(memToDrop.fullName() + " done with the class.");
             }
         }
         else{
@@ -330,19 +341,16 @@ public class GymManager {
         }
     }
 
-    public void dropGuest(String[] memberInfo, FitnessClass classToDrop){
-        Member memToDrop = memData.getFullDetails(new Member(memberInfo[4], memberInfo[5], new Date(memberInfo[6])));
-        classToDrop.removeGuest(memToDrop);
-        System.out.println(memToDrop.fullName() + " Guest done with the class.");
+    public void dropGuest(Member memToDrop, FitnessClass classToDrop){
+        int dropGuestCondition = classToDrop.removeGuest(memToDrop);
+        if(dropGuestCondition == NOT_CHECKED_IN){
+            System.out.println(memToDrop.fullName() + " did not check in.");
+        }
+        else {
+            System.out.println(memToDrop.fullName() + " Guest done with the class.");
+        }
     }
 
-    private boolean checkMemberCredentials(String location, String dob){
-        if(!isValidLocation(location)){
-            return false;
-        }
-        if (!isValidDateOfBirth(new Date(dob))) return false;
-        return true;
-    }
 
     /**
      * Gets the index of the inputted class in the array of classes
@@ -374,7 +382,17 @@ public class GymManager {
     }
 
     private boolean checkClassCredentials(String[] classInfo){
-        if(!isValidLocation(classInfo[3])) return false;
+        boolean locationExists = false;
+        for (Location locations : Location.values()) {
+            if (classInfo[3].toUpperCase().equals(locations.name())) {
+                locationExists = true;
+                break;
+            }
+        }
+        if(!locationExists){
+            System.out.println(classInfo[3] + " - invalid location.");
+            return false;
+        }
         if(!isValidInstructor(classInfo[2])) return false;
         if(!isValidClass(classInfo[1])) return false;
         return true;
@@ -387,13 +405,13 @@ public class GymManager {
      * @param location To be checked against the elements of the locations array
      * @return true if the location is in the array of locations, else false
      */
-    public boolean isValidLocation(String location) {
+    private boolean isValidLocation(String location) {
         for (Location locations : Location.values()) {
             if (location.toUpperCase().equals(locations.name())) {
                 return true;
             }
         }
-        System.out.println(location + " - invalid location.");
+        System.out.println(location + ": invalid location!");
         return false;
     }
 
@@ -404,6 +422,7 @@ public class GymManager {
                 return true;
             }
         }
+        System.out.println(instructor + " - instructor does not exist.");
         return false;
     }
 
@@ -488,7 +507,7 @@ public class GymManager {
      */
     public void printClass(FitnessClass fitClass) {
         System.out.println(fitClass.getClassName().toUpperCase() + " - " + fitClass.getInstructor().toUpperCase() + ", " +
-                fitClass.getTimeOfClass().hourAndMinute() + ", " + fitClass.getLocation());
+                fitClass.getTimeOfClass().hourAndMinute() + ", " + fitClass.getLocation().name());
         if (fitClass.getSize() > 0) {
             System.out.println("- Participants -");
             for (int i = 0; i < fitClass.getSize(); i++) {

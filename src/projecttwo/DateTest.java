@@ -33,7 +33,6 @@ public class DateTest {
     @Test
     public void testDaysInThirtyOneDayMonth() {
         Date date = new Date("05/32/2002");
-        boolean expectedOutput = false;
         assertFalse(date.isValid());
         date = new Date("05/31/2002");
         assertTrue(date.isValid());

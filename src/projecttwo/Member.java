@@ -107,7 +107,7 @@ public class Member implements Comparable<Member> {
         if (expire != null && location != null) {
             return fname + " " + lname + ", " + "DOB: " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear() + ", " +
                     expirationStatus + " " + expire.getMonth() + "/" + expire.getDay() + "/" + expire.getYear() + ", " +
-                    "Location: " + location.toString() + ", " + location.zipCode() + ", " + location.county();
+                    "Location: " + location.toString();
         } else {
             return fname + " " + lname + ", " + "DOB: " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear();
         }

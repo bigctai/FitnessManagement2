@@ -124,7 +124,7 @@ public class MemberDatabase {
     public Member getFullDetails(Member mem) {
         if (find(mem) >= 0) return mlist[find(mem)];
         else {
-            return null;
+            return mem;
         }
     }
 
@@ -211,8 +211,14 @@ public class MemberDatabase {
     } //sort by last name and then first name
 
     public void printWithFees(){
+        if (size == 0) {
+            System.out.println("Member database is empty!");
+            return;
+        }
+        System.out.println("\n-list of members with membership fees");
         for(int i = 0; i < size; i++){
             System.out.println(mlist[i].toString() + ", Membership fee: $" + mlist[i].membershipFee());
         }
+        System.out.println("-end of list-\n");
     }
 }
