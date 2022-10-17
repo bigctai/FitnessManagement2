@@ -118,8 +118,8 @@ public class Date implements Comparable<Date> {
 
     public String dateString(){ return this.month + "/" + this.day + "/" + this.year;}
 
-    public void setExpire(){
-        month += EXPIRATION;
+    public void setExpire(int membershipLife){
+        month += membershipLife;
     }
 
     /**

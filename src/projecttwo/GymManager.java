@@ -27,6 +27,8 @@ public class GymManager {
     private static final int NOT_CHECKED_IN = -9;
     private final int INVALID_DATE = -10;
     private static final int ADULT = 18;
+    private final int STANDARD_AND_FAMILY_EXPIRATION = 3;
+    private final int PREMIUM_EXPIRATION = 12;
 
     /**
      * Calls methods based on user input
@@ -168,11 +170,11 @@ public class GymManager {
             dob = new Date(memberToAdd[3]);
             expirationDate = new Date();
             if(memberToAdd[0].equals("AF")){
-                expirationDate.setExpire();
+                expirationDate.setExpire(STANDARD_AND_FAMILY_EXPIRATION);
                 return new Family (firstName, lastName, dob, expirationDate, location, 1);
             }
             else if(memberToAdd[0].equals("AP")){
-                expirationDate.setExpire();
+                expirationDate.setExpire(PREMIUM_EXPIRATION);
                 return new Premium (firstName, lastName, dob, expirationDate, location, 3);
             }
         }
@@ -182,7 +184,7 @@ public class GymManager {
             dob = new Date(memberToAdd[2]);
             expirationDate = new Date(memberToAdd[3]);
         }
-        expirationDate.setExpire();
+        expirationDate.setExpire(STANDARD_AND_FAMILY_EXPIRATION);
         return new Member(firstName, lastName, dob, expirationDate, location);
     }
 
