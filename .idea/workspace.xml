@@ -19,11 +19,6 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b5731b0-f7b3-4710-9b8d-67f7db849854" name="Changes" comment="Added comments to all remaining methods in all classes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/DateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/FitnessClassTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/projecttwo/PremiumTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,12 +324,6 @@
       <option name="project" value="LOCAL" />
       <updated>1666036135338</updated>
     </task>
-    <task id="LOCAL-00034" summary="Added comments to all remaining methods in all classes">
-      <created>1666045409993</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1666045409993</updated>
     </task>
     <option name="localTasksCounter" value="35" />
     <servers />
@@ -423,30 +412,9 @@
     <MESSAGE value="Updated exception catch block" />
     <MESSAGE value="Updated where methods are called" />
     <MESSAGE value="Updated print methods" />
-    <MESSAGE value="Fixed bugs" />
     <MESSAGE value="Updated test cases" />
     <MESSAGE value="Started PremiumTest" />
     <MESSAGE value="updated tests" />
     <MESSAGE value="Updated expiration dates" />
-    <MESSAGE value="Added comments to all remaining methods in all classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added comments to all remaining methods in all classes" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1666045449121">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1666045449121" />
-    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1666045449120">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1666045449120" />
-    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1666045449120">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1666045449120" />
-    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1666045449121">
-      <screen x="0" y="0" width="1536" height="816" />
-    </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1666045449121" />
   </component>
 </project>
